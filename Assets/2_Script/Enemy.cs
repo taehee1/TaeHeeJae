@@ -7,8 +7,6 @@ public class Enemy : MonoBehaviour
 {
     public float hp = 1000f;
 
-    public GameObject dmgTxt;
-
     public void TakeDamage(float damage)
     {
         hp -= damage;
@@ -17,8 +15,7 @@ public class Enemy : MonoBehaviour
 
     private void DamageDisplay(float damage)
     {
-        dmgTxt.SetActive(true);
-        dmgTxt.GetComponent<Text>().text = $"-{damage}";
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
