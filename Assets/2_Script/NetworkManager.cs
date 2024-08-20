@@ -10,9 +10,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public InputField nicknameInput;
     public Text networkSituation;
 
+    public static NetworkManager instance;
+
     private void Awake()
     {
         Screen.SetResolution(960, 540, false);
+        instance = this;
         nicknameInput.text = null;
     }
 
