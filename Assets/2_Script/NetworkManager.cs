@@ -15,6 +15,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public GameObject lobbyPanel;
     public InputField roomInput;
 
+
     [Header("RoomPanel")]
 
     public static NetworkManager instance;
