@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
     [Header("MainPanel")]
+    public GameObject mainPanel;
     public InputField nicknameInput;
     public Text networkSituation;
 
@@ -15,8 +16,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public GameObject lobbyPanel;
     public InputField roomInput;
 
-
     [Header("RoomPanel")]
+    public GameObject roomPanel;
+
+
+    public List<RoomInfo> myList = new List<RoomInfo>();
 
     public static NetworkManager instance;
 
@@ -33,6 +37,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         networkSituation.text = PhotonNetwork.NetworkClientState.ToString();
     }
 
+    #region 서버연결
     //서버연결
     public void Connect()
     {
@@ -50,7 +55,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         print("서버연결완료");
-        PhotonNetwork.LocalPlayer.NickName = nicknameInput.text;
 
         if (!PhotonNetwork.InLobby)
         {
@@ -63,8 +67,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     //로비연결완료
     public override void OnJoinedLobby()
     {
-        base.OnJoinedLobby();
+        lobbyPanel.SetActive(true);
+        mainPanel.SetActive(false);
+        PhotonNetwork.LocalPlayer.NickName = nicknameInput.text;
         Debug.Log("로비 접속 완료");
+        myList.Clear();
     }
 
     public void Disconnect()
@@ -75,5 +82,57 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause)
     {
         print("연결끊김");
+        lobbyPanel.SetActive(false);
+        mainPanel.SetActive(true);
+    }
+    #endregion
+
+
+    #region 방
+    public void CreateRoom()
+    {
+        PhotonNetwork.CreateRoom(roomInput.text == "" ? "Room" + Random.Range(0, 100) : roomInput.text, new RoomOptions { MaxPlayers = 2 });
+    }
+
+    public override void OnJoinedRoom()
+    {
+        roomPanel.SetActive(true);
+
+    }
+
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        roomInput.text = "";
+        CreateRoom();
+    }
+
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        
+    }
+    #endregion
+
+
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        int roomCount = roomList.Count;
+        for (int i = 0; i < roomCount; i++)
+        {
+            if (!roomList[i].RemovedFromList)
+            {
+                if (!myList.Contains(roomList[i]))
+                {
+                    myList.Add(roomList[i]);
+                }
+                else
+                {
+                    myList[myList.IndexOf(roomList[i])] = roomList[i];
+                }
+            }
+            else if (myList.IndexOf(roomList[i]) != -1)
+            {
+                myList.RemoveAt(myList.IndexOf(roomList[i]));
+            }
+        }
     }
 }
