@@ -33,7 +33,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     private void Awake()
     {
         PhotonNetwork.PhotonServerSettings.AppSettings.FixedRegion = "kr";
-        Screen.SetResolution(1920, 1080, false);
+        Screen.SetResolution(960, 540, false);
         instance = this;
         nicknameInput.text = null;
     }
@@ -115,7 +115,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("방참가 완료");
+        lobbyPanel.SetActive(false);
         roomPanel.SetActive(true);
+        CheckPlayerCount();
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -126,7 +128,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        
+        CheckPlayerCount();
+    }
+
+    void CheckPlayerCount()
+    {
+        if (PhotonNetwork.CurrentRoom.PlayerCount == PhotonNetwork.CurrentRoom.MaxPlayers)
+        {
+            // 방의 모든 플레이어를 특정 씬으로 전환
+            PhotonNetwork.LoadLevel("InGame"); // "GameScene"을 원하는 씬 이름으로 교체
+        }
     }
     #endregion
 
@@ -134,37 +145,35 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     #region 방리스트
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        myList.Clear();
-
         foreach (RoomInfo room in roomList)
         {
             if (room.RemovedFromList)
             {
                 if (myList.ContainsKey(room.Name))
                 {
-                    myList.Remove(room.Name);
+                    myList.Remove(room.Name);  // 방이 삭제되면 리스트에서 제거
                 }
             }
             else
             {
                 if (myList.ContainsKey(room.Name))
                 {
-                    myList[room.Name] = room;
+                    myList[room.Name] = room;  // 이미 있는 방 정보 업데이트
                 }
                 else
                 {
-                    myList.Add(room.Name, room);
+                    myList.Add(room.Name, room);  // 새로운 방 추가
                 }
             }
         }
-        UpdateRoomList();
+        UpdateRoomList();  // 방 리스트 UI 업데이트
     }
 
     void UpdateRoomList()
     {
         foreach (Transform child in roomListContent.transform)
         {
-            Destroy(child.gameObject);
+            Destroy(child.gameObject);  // 기존 UI 항목들 삭제
         }
 
         foreach (RoomInfo roomInfo in myList.Values)
