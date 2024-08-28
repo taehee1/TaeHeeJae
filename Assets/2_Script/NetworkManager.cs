@@ -171,6 +171,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     void UpdateRoomList()
     {
+        Debug.Log("방 리스트 UI 업데이트 시작");
+        Debug.Log($"현재 myList의 방 개수: {myList.Count}");
         foreach (Transform child in roomListContent.transform)
         {
             Destroy(child.gameObject);  // 기존 UI 항목들 삭제
@@ -181,9 +183,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             GameObject roomItem = Instantiate(roomListItemPrefab, roomListContent.transform);
             roomItem.GetComponentInChildren<Text>().text = roomInfo.Name;
 
+            Debug.Log($"새로운 방 항목 추가: {roomInfo.Name}");
+
             Button roomButton = roomItem.GetComponent<Button>();
             roomButton.onClick.AddListener(() => JoinRoom(roomInfo.Name));
         }
+
+        Debug.Log("방 리스트 UI 업데이트 완료");
     }
 
     void JoinRoom(string roomName)
