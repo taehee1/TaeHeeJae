@@ -7,6 +7,9 @@ using UnityEngine.UI;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
+    [Header("LoadingPanel")]
+    public GameObject connectLoadingPanel;
+
     [Header("MainPanel")]
     public GameObject mainPanel;
     public InputField nicknameInput;
@@ -14,22 +17,30 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     [Header("LobbyPanel")]
     public GameObject lobbyPanel;
+    public Button createRoomButton;
     public InputField roomInput;
+    public GameObject roomListContent;
+    public GameObject roomListItemPrefab;
 
     [Header("RoomPanel")]
     public GameObject roomPanel;
 
 
-    public List<RoomInfo> myList = new List<RoomInfo>();
+    private Dictionary<string, RoomInfo> myList = new Dictionary<string, RoomInfo>();
 
     public static NetworkManager instance;
 
     private void Awake()
     {
         PhotonNetwork.PhotonServerSettings.AppSettings.FixedRegion = "kr";
-        Screen.SetResolution(960, 540, false);
+        Screen.SetResolution(1920, 1080, false);
         instance = this;
         nicknameInput.text = null;
+    }
+
+    private void Start()
+    {
+        createRoomButton.onClick.AddListener(CreateRoom);
     }
 
     private void Update()
@@ -41,9 +52,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     //서버연결
     public void Connect()
     {
-        if (nicknameInput.text != null)
+        if (nicknameInput.text != "")
         {
             PhotonNetwork.ConnectUsingSettings();
+            connectLoadingPanel.SetActive(true);
         }
         else
         {
@@ -67,6 +79,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     //로비연결완료
     public override void OnJoinedLobby()
     {
+        connectLoadingPanel.SetActive(false);
         lobbyPanel.SetActive(true);
         mainPanel.SetActive(false);
         PhotonNetwork.LocalPlayer.NickName = nicknameInput.text;
@@ -91,13 +104,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     #region 방
     public void CreateRoom()
     {
-        PhotonNetwork.CreateRoom(roomInput.text == "" ? "Room" + Random.Range(0, 100) : roomInput.text, new RoomOptions { MaxPlayers = 2 });
+        if (!string.IsNullOrEmpty(roomInput.text))
+        {
+            RoomOptions roomOptions = new RoomOptions();
+            roomOptions.MaxPlayers = 2;
+            PhotonNetwork.CreateRoom(roomInput.text, roomOptions);
+        }
     }
 
     public override void OnJoinedRoom()
     {
+        Debug.Log("방참가 완료");
         roomPanel.SetActive(true);
-
     }
 
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -113,26 +131,55 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     #endregion
 
 
+    #region 방리스트
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        int roomCount = roomList.Count;
-        for (int i = 0; i < roomCount; i++)
+        myList.Clear();
+
+        foreach (RoomInfo room in roomList)
         {
-            if (!roomList[i].RemovedFromList)
+            if (room.RemovedFromList)
             {
-                if (!myList.Contains(roomList[i]))
+                if (myList.ContainsKey(room.Name))
                 {
-                    myList.Add(roomList[i]);
+                    myList.Remove(room.Name);
+                }
+            }
+            else
+            {
+                if (myList.ContainsKey(room.Name))
+                {
+                    myList[room.Name] = room;
                 }
                 else
                 {
-                    myList[myList.IndexOf(roomList[i])] = roomList[i];
+                    myList.Add(room.Name, room);
                 }
             }
-            else if (myList.IndexOf(roomList[i]) != -1)
-            {
-                myList.RemoveAt(myList.IndexOf(roomList[i]));
-            }
+        }
+        UpdateRoomList();
+    }
+
+    void UpdateRoomList()
+    {
+        foreach (Transform child in roomListContent.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        foreach (RoomInfo roomInfo in myList.Values)
+        {
+            GameObject roomItem = Instantiate(roomListItemPrefab, roomListContent.transform);
+            roomItem.GetComponentInChildren<Text>().text = roomInfo.Name;
+
+            Button roomButton = roomItem.GetComponent<Button>();
+            roomButton.onClick.AddListener(() => JoinRoom(roomInfo.Name));
         }
     }
+
+    void JoinRoom(string roomName)
+    {
+        PhotonNetwork.JoinRoom(roomName);
+    }
+    #endregion
 }
