@@ -24,4 +24,9 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     {
         
     }
+
+    public void TakeDamage(float damage)
+    {
+        currentHp -= damage;
+    }
 }
