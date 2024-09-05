@@ -366,8 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bdc94797e0e3354dbe4cf9d2b7ab6bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orbPrefabs:
-  - {fileID: 6920246924187966754, guid: 8b1d4fdb1ecc17343ae81379618fba96, type: 3}
+  orbPrefabs: []
   orbSpawnPos: {fileID: 7533063031460283316}
   orbIndex: 0
   player: {fileID: 5511371573783665019}
