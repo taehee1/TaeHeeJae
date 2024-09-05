@@ -38,13 +38,13 @@ public class Bullet : MonoBehaviour, IShootable
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //АјАн
-        if (collision.gameObject.GetComponent<PhotonView>().IsMine != true && gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<PhotonView>().IsMine == false)
         {
             gameObject.GetComponent<PlayerScript>().TakeDamage(damage);
         }
         else
         {
-
+            
         }
     }
 }
