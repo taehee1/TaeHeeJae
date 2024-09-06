@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7533063031460283316}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2388966469593881427}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.01, y: 0.47, z: 0}
+  m_LocalPosition: {x: 1.56, y: 0.47, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 4239597303002632670}
   - component: {fileID: 15983875239863954}
   - component: {fileID: 8763271117655629897}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -63,8 +63,8 @@ Transform:
   m_GameObject: {fileID: 5511371573783665019}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.5173926, y: -1.645945, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8738914354998152677}
@@ -110,7 +110,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 18f7573b9c346c34fbf7b81bf9da9db0, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -279,8 +279,8 @@ GameObject:
   - component: {fileID: 8253637103281480102}
   - component: {fileID: 6827413262112158635}
   - component: {fileID: 9158122038297403085}
-  m_Layer: 0
-  m_Name: Gun
+  m_Layer: 10
+  m_Name: Pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -295,8 +295,8 @@ Transform:
   m_GameObject: {fileID: 5702501535698735083}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.018, y: -0.005, z: 0}
-  m_LocalScale: {x: 0.44384518, y: 0.44384518, z: 0.44384518}
+  m_LocalPosition: {x: 1.04, y: -0.020000136, z: 0}
+  m_LocalScale: {x: 0.44384515, y: 0.44384515, z: 0.44384515}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7533063031460283316}
@@ -342,7 +342,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 07bb0295934b95841a4d292675ddcaaa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
