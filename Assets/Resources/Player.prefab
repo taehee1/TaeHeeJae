@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 2388966469593881427}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.56, y: 0.47, z: 0}
+  m_LocalPosition: {x: 4, y: 0.47, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -295,9 +295,9 @@ Transform:
   m_GameObject: {fileID: 5702501535698735083}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.04, y: -0.020000136, z: 0}
-  m_LocalScale: {x: 0.44384515, y: 0.44384515, z: 0.44384515}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: -0.020000137, z: 0}
+  m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7533063031460283316}
   m_Father: {fileID: 2368172922801626080}
@@ -387,7 +387,7 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 3
   OwnershipTransfer: 0
-  observableSearch: 0
+  observableSearch: 1
   ObservedComponents:
   - {fileID: 9158122038297403085}
   sceneViewId: 0

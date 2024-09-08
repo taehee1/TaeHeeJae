@@ -11,6 +11,7 @@ public class Shooter : MonoBehaviour
     [SerializeField] private GameObject player;
 
     private Camera cam;
+    private Animator anim;
 
     Vector2 MousePos
     {
@@ -25,12 +26,14 @@ public class Shooter : MonoBehaviour
     private void Awake()
     {
         cam = Camera.main;
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
     {
         Shoot();
         GunPos();
+        Reload();
     }
 
     private void Shoot()
@@ -87,6 +90,14 @@ public class Shooter : MonoBehaviour
         else
         {
             gameObject.GetComponent<SpriteRenderer>().flipY = false;
+        }
+    }
+
+    private void Reload()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            anim.SetTrigger("Reload");
         }
     }
 }
