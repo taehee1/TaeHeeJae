@@ -10,6 +10,10 @@ public class Shooter : MonoBehaviour
     [SerializeField] private int orbIndex = 0; // 원하는 오브 프리팹의 인덱스를 선택합니다.
     [SerializeField] private GameObject player;
 
+    public PhotonView pv;
+
+    private float lastAngle;
+
     private Camera cam;
     private Animator anim;
 
@@ -51,7 +55,7 @@ public class Shooter : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError("The orb does not implement IShootable interface.");
+                    Debug.Log("The orb does not implement IShootable interface.");
                 }
             }
         }
@@ -70,11 +74,16 @@ public class Shooter : MonoBehaviour
             // 총의 오브젝트 회전을 변경합니다. Z축을 기준으로 회전하므로 Quaternion.Euler을 사용합니다.
             gameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
-            GunFlip();
+            if (Mathf.Abs(lastAngle - angle) > 1f) // 임계값 1도 차이로 설정
+            {
+                pv.RPC("GunFlip", RpcTarget.AllBuffered);
+                lastAngle = angle;
+            }
         }
     }
 
-    private void GunFlip()
+    [PunRPC]
+    void GunFlip()
     {
         float angle = transform.rotation.eulerAngles.z;
 
@@ -97,7 +106,7 @@ public class Shooter : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-            anim.SetTrigger("Reload");
+            
         }
     }
 }

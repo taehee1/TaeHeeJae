@@ -7,8 +7,6 @@ public class Bullet : MonoBehaviour, IShootable
 {
     private Rigidbody2D rb;
 
-    Enemy enemy;
-
     public float speed = 10f;
     public float damage = 10f;
 
@@ -37,10 +35,20 @@ public class Bullet : MonoBehaviour, IShootable
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        PhotonView photonView = collision.gameObject.GetComponent<PhotonView>();
+
         //공격
         if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<PhotonView>().IsMine == false)
         {
-            gameObject.GetComponent<PlayerScript>().TakeDamage(damage);
+            PlayerScript playerScript = gameObject.GetComponent<PlayerScript>();
+
+            // PlayerScript가 있는지 확인
+            if (playerScript != null)
+            {
+                playerScript.TakeDamage(damage);
+            }
+
+            Destroy(gameObject);
         }
         else
         {
