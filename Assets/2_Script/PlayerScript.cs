@@ -31,7 +31,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         Jump();
     }
 
-
+    [PunRPC]
     public void TakeDamage(float damage)
     {
         currentHp -= damage;

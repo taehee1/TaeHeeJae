@@ -40,13 +40,7 @@ public class Bullet : MonoBehaviour, IShootable
         //공격
         if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<PhotonView>().IsMine == false)
         {
-            PlayerScript playerScript = gameObject.GetComponent<PlayerScript>();
-
-            // PlayerScript가 있는지 확인
-            if (playerScript != null)
-            {
-                playerScript.TakeDamage(damage);
-            }
+            photonView.RPC("TakeDamage", RpcTarget.AllBuffered, damage);
 
             Destroy(gameObject);
         }
