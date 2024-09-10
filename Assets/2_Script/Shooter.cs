@@ -10,6 +10,8 @@ public class Shooter : MonoBehaviour
     [SerializeField] private int orbIndex = 0; // 원하는 오브 프리팹의 인덱스를 선택합니다.
     [SerializeField] private GameObject player;
 
+    public GameObject grenade;
+
     public PhotonView pv;
 
     private float lastAngle;
@@ -38,6 +40,7 @@ public class Shooter : MonoBehaviour
         Shoot();
         GunPos();
         Reload();
+        Grenade();
     }
 
     private void Shoot()
@@ -107,6 +110,24 @@ public class Shooter : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             
+        }
+    }
+
+    private void Grenade()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Vector2 direction = (MousePos - (Vector2)player.transform.position).normalized; // 오브젝트 위치를 사용하여 방향을 계산합니다.
+            GameObject orbInstance = Instantiate(grenade, orbSpawnPos.position, Quaternion.identity);
+            IShootable orb = orbInstance.GetComponent<IShootable>();
+            if (orb != null)
+            {
+                orb.Shoot(direction);
+            }
+            else
+            {
+                Debug.Log("The orb does not implement IShootable interface.");
+            }
         }
     }
 }
