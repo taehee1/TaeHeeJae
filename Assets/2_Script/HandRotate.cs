@@ -1,21 +1,19 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shooter : MonoBehaviour
+public class HandRotate : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> orbPrefabs;
-    [SerializeField] private Transform spawnPos;
-    [SerializeField] private int orbIndex = 0; // 원하는 오브 프리팹의 인덱스를 선택합니다.
     [SerializeField] private GameObject player;
+    [SerializeField] private SpriteRenderer gunSpr;
 
     public PhotonView pv;
 
     private float lastAngle;
 
     private Camera cam;
-    private Animator anim;
 
     Vector2 MousePos
     {
@@ -30,35 +28,11 @@ public class Shooter : MonoBehaviour
     private void Awake()
     {
         cam = Camera.main;
-        anim = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        Shoot();
-        //GunPos();
-        Reload();
-    }
-
-    private void Shoot()
-    {
-        if (player.GetComponent<PlayerScript>().pv.IsMine)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Vector2 direction = (MousePos - (Vector2)player.transform.position).normalized; // 오브젝트 위치를 사용하여 방향을 계산합니다.
-                GameObject orbInstance = PhotonNetwork.Instantiate("Bullet", spawnPos.position, Quaternion.identity);
-                IShootable orb = orbInstance.GetComponent<IShootable>();
-                if (orb != null)
-                {
-                    orb.Shoot(direction);
-                }
-                else
-                {
-                    Debug.Log("The orb does not implement IShootable interface.");
-                }
-            }
-        }
+        GunPos();
     }
 
     private void GunPos()
@@ -94,19 +68,11 @@ public class Shooter : MonoBehaviour
 
         if (angle > 90f || angle < -90f)
         {
-            gameObject.GetComponent<SpriteRenderer>().flipY = true;
+            gunSpr.GetComponent<SpriteRenderer>().flipY = true;
         }
         else
         {
-            gameObject.GetComponent<SpriteRenderer>().flipY = false;
-        }
-    }
-
-    private void Reload()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            
+            gunSpr.GetComponent<SpriteRenderer>().flipY = false;
         }
     }
 }

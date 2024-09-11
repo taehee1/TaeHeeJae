@@ -29,11 +29,12 @@ public class Bullet : MonoBehaviour, IShootable
             Debug.LogError("Rigidbody2D가 할당되지 않았습니다!");
             return;
         }
+        Debug.Log(direction);
 
         rb.velocity = direction * speed;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         PhotonView photonView = collision.gameObject.GetComponent<PhotonView>();
 
@@ -44,9 +45,9 @@ public class Bullet : MonoBehaviour, IShootable
 
             Destroy(gameObject);
         }
-        else
+        else if (collision.gameObject.tag == "Ground")
         {
-            
+            Destroy(gameObject);
         }
     }
 }

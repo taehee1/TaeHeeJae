@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -8,18 +9,26 @@ public class Grenade : MonoBehaviour, IShootable
     [SerializeField] private float bombTime = 3f;
     [SerializeField] private float speed = 5f;
 
+    private CameraShake cameraShake;
     public GameObject particle;
     public Rigidbody2D rb;
+    public PhotonView pv;
 
     private void Start()
     {
+        cameraShake = GetComponent<CameraShake>();
         StartCoroutine("Bomb");
     }
 
     IEnumerator Bomb()
     {
         yield return new WaitForSeconds(bombTime);
-        Instantiate(particle, transform.position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Explosion", transform.position, Quaternion.identity);
+
+        cameraShake.ShakeCamera();
+
+        pv.RPC("RPC_ShakeCamera", RpcTarget.Others);
+
         Destroy(gameObject);
     }
 
