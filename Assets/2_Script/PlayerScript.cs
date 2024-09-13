@@ -18,10 +18,18 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     public float currentHp = 100;
     [SerializeField] private float maxHp = 100;
 
+    public Vector3 spawnPosition;  // 시작 위치
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
 
+    }
+
+    private void Start()
+    {
+        currentHp = maxHp;
+        spawnPosition = transform.position;
     }
 
 
@@ -31,12 +39,6 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         Jump();
     }
 
-    [PunRPC]
-    public void TakeDamage(float damage)
-    {
-        currentHp -= damage;
-        hpUI.fillAmount = currentHp / maxHp;
-    }
 
     private void Move()
     {
@@ -69,5 +71,36 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         {
             hpUI.fillAmount = (float)stream.ReceiveNext();
         }
+    }
+
+    [PunRPC]
+    public void TakeDamage(float damage)
+    {
+        if (!photonView.IsMine) return;
+
+        currentHp -= damage;
+        hpUI.fillAmount = currentHp / maxHp;
+
+        if (currentHp <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        // 체력을 초기화하고 리스폰 위치로 이동
+        currentHp = maxHp;
+        transform.position = spawnPosition;
+
+        // 추가적인 리스폰 로직 (무적시간, 애니메이션 등)
+        photonView.RPC("OnRespawn", RpcTarget.All, photonView.Owner.NickName);
+    }
+
+    [PunRPC]
+    public void OnRespawn(string playerName)
+    {
+        Debug.Log($"{playerName} has respawned.");
+        // 필요하다면 다른 클라이언트에서 플레이어의 리스폰 상태를 처리
     }
 }

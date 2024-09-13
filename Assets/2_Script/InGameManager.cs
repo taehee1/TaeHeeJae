@@ -4,16 +4,34 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class InGameManager : MonoBehaviourPunCallbacks, IPunObservable
+public class InGameManager : MonoBehaviourPunCallbacks
 {
+    // Transform으로 스폰 위치를 오브젝트에서 받아오기
+    [SerializeField] private Transform player1SpawnTransform;  // 1번 플레이어 스폰 오브젝트
+    [SerializeField] private Transform player2SpawnTransform;  // 2번 플레이어 스폰 오브젝트
+
 
     private void Awake()
     {
         PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        SpawnPlayer();
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    private void SpawnPlayer()
     {
+        Vector3 spawnPosition;
 
+        // 플레이어 리스트에서 자신의 순서에 맞는 스폰 위치를 지정
+        if (PhotonNetwork.IsMasterClient) // 방을 만든 플레이어
+        {
+            spawnPosition = player1SpawnTransform.position; // 1번 플레이어 스폰 위치
+        }
+        else // 방에 참여한 플레이어
+        {
+            spawnPosition = player2SpawnTransform.position; // 2번 플레이어 스폰 위치
+        }
+
+        // 플레이어 생성 (PhotonNetwork.Instantiate 사용)
+        PhotonNetwork.Instantiate("Player", spawnPosition, Quaternion.identity);
     }
 }

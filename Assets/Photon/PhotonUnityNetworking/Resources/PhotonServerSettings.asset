@@ -42,6 +42,9 @@ MonoBehaviour:
   - GunFlip
   - TakeDamage
   - RPC_ShakeCamera
+  - EndGame
+  - OnCaptureComplete
+  - OnRespawn
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

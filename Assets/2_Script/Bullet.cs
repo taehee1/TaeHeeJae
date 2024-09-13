@@ -39,15 +39,15 @@ public class Bullet : MonoBehaviour, IShootable
         PhotonView photonView = collision.gameObject.GetComponent<PhotonView>();
 
         //АјАн
-        if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<PhotonView>().IsMine == false)
+        if (collision.gameObject.tag == "Player" && !photonView.IsMine)
         {
             photonView.RPC("TakeDamage", RpcTarget.AllBuffered, damage);
 
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
         else if (collision.gameObject.tag == "Ground")
         {
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 }
