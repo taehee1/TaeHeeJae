@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 204331195}
   - component: {fileID: 204331194}
   - component: {fileID: 204331196}
+  - component: {fileID: 204331197}
   m_Layer: 0
   m_Name: Square (6)
   m_TagString: Untagged
@@ -300,6 +301,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   moveDistance: 3.5
+--- !u!50 &204331197
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 204331192}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 5
 --- !u!1 &339404429
 GameObject:
   m_ObjectHideFlags: 3
@@ -638,6 +666,7 @@ GameObject:
   - component: {fileID: 693917198}
   - component: {fileID: 693917197}
   - component: {fileID: 693917199}
+  - component: {fileID: 693917200}
   m_Layer: 0
   m_Name: Square (1)
   m_TagString: Untagged
@@ -771,6 +800,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   moveDistance: 3
+--- !u!50 &693917200
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693917195}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 5
 --- !u!1 &780313144
 GameObject:
   m_ObjectHideFlags: 0
@@ -1381,75 +1437,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &1293872913
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1106395767678515718, guid: 37ef0074419cdc840809e0e15a862e1f, type: 3}
-      propertyPath: sceneViewId
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2368172922801626080, guid: 37ef0074419cdc840809e0e15a862e1f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -7.88
-      objectReference: {fileID: 0}
-    - target: {fileID: 2368172922801626080, guid: 37ef0074419cdc840809e0e15a862e1f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.379541
-      objectReference: {fileID: 0}
-    - target: {fileID: 2368172922801626080, guid: 37ef0074419cdc840809e0e15a862e1f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2368172922801626080, guid: 37ef0074419cdc840809e0e15a862e1f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2368172922801626080, guid: 37ef0074419cdc840809e0e15a862e1f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2368172922801626080, guid: 37ef0074419cdc840809e0e15a862e1f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2368172922801626080, guid: 37ef0074419cdc840809e0e15a862e1f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2368172922801626080, guid: 37ef0074419cdc840809e0e15a862e1f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2368172922801626080, guid: 37ef0074419cdc840809e0e15a862e1f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2368172922801626080, guid: 37ef0074419cdc840809e0e15a862e1f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5462783351774358746, guid: 37ef0074419cdc840809e0e15a862e1f, type: 3}
-      propertyPath: sceneViewId
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5511371573783665019, guid: 37ef0074419cdc840809e0e15a862e1f, type: 3}
-      propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6827413262112158635, guid: 37ef0074419cdc840809e0e15a862e1f, type: 3}
-      propertyPath: sceneViewId
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 37ef0074419cdc840809e0e15a862e1f, type: 3}
 --- !u!1 &1298218161
 GameObject:
   m_ObjectHideFlags: 0
@@ -1462,6 +1449,7 @@ GameObject:
   - component: {fileID: 1298218164}
   - component: {fileID: 1298218163}
   - component: {fileID: 1298218165}
+  - component: {fileID: 1298218166}
   m_Layer: 0
   m_Name: Square (6)
   m_TagString: Untagged
@@ -1595,6 +1583,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   moveDistance: 3.5
+--- !u!50 &1298218166
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298218161}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 5
 --- !u!1 &1366043003
 GameObject:
   m_ObjectHideFlags: 0
@@ -1885,6 +1900,7 @@ GameObject:
   - component: {fileID: 1677459825}
   - component: {fileID: 1677459824}
   - component: {fileID: 1677459826}
+  - component: {fileID: 1677459827}
   m_Layer: 0
   m_Name: Square (6)
   m_TagString: Untagged
@@ -2018,6 +2034,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   moveDistance: 3
+--- !u!50 &1677459827
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677459822}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 5
 --- !u!1 &1744993010
 GameObject:
   m_ObjectHideFlags: 0
@@ -2764,4 +2807,3 @@ SceneRoots:
   - {fileID: 2025814803}
   - {fileID: 560347041}
   - {fileID: 1242714773}
-  - {fileID: 1293872913}

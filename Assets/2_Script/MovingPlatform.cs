@@ -7,18 +7,22 @@ public class MovingPlatform : MonoBehaviour
 
     private Vector3 startPosition;
     private bool movingUp = true;
+    private Rigidbody2D rb;
 
     void Start()
     {
         startPosition = transform.position; // 시작 위치 저장
+        rb = GetComponent<Rigidbody2D>(); // Rigidbody2D 컴포넌트 가져오기
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        Vector3 targetPosition;
+
         // 플랫폼의 현재 위치 계산
         if (movingUp)
         {
-            transform.position += Vector3.up * speed * Time.deltaTime;
+            targetPosition = transform.position + Vector3.up * speed * Time.fixedDeltaTime;
 
             // 위쪽으로 지정한 거리만큼 이동했으면 방향 전환
             if (transform.position.y >= startPosition.y + moveDistance)
@@ -28,7 +32,7 @@ public class MovingPlatform : MonoBehaviour
         }
         else
         {
-            transform.position += Vector3.down * speed * Time.deltaTime;
+            targetPosition = transform.position + Vector3.down * speed * Time.fixedDeltaTime;
 
             // 아래쪽으로 지정한 거리만큼 이동했으면 방향 전환
             if (transform.position.y <= startPosition.y - moveDistance)
@@ -36,5 +40,8 @@ public class MovingPlatform : MonoBehaviour
                 movingUp = true;
             }
         }
+
+        // Rigidbody를 이용해 이동
+        rb.MovePosition(targetPosition);
     }
 }
