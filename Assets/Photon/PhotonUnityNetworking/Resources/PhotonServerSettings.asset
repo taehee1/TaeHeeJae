@@ -45,6 +45,10 @@ MonoBehaviour:
   - EndGame
   - OnCaptureComplete
   - OnRespawn
+  - StopCaptureGauge
+  - UpdateCaptureGauge
+  - StartCapture
+  - StopCapture
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

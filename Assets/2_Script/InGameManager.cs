@@ -13,7 +13,6 @@ public class InGameManager : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
         SpawnPlayer();
     }
 
