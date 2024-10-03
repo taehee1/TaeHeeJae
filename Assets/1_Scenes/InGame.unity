@@ -538,7 +538,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.78}
+  m_AnchoredPosition: {x: 0, y: 0.03}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &341876194
@@ -767,12 +767,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   captureKeyImage: {fileID: 1131389800}
-  captureKeyGaugeImage: {fileID: 0}
   player1CaptureGauge: {fileID: 1574139389}
   player2CaptureGauge: {fileID: 341876194}
-  captureTime: 3
+  captureTime: 2
   maxCaptureGauge: 100
-  captureGaugeSpeed: 10
+  captureGaugeSpeed: 5
 --- !u!212 &626218970
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1572,7 +1571,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.75}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1710279294
