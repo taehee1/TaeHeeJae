@@ -181,7 +181,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 151283451}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: df0fc25951028d9409fa5e2fbeb725f8, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -702,10 +702,11 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 2
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 626218969}
   sceneViewId: 6
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -772,6 +773,7 @@ MonoBehaviour:
   captureTime: 2
   maxCaptureGauge: 100
   captureGaugeSpeed: 5
+  gaugeSyncThreshold: 1
 --- !u!212 &626218970
 SpriteRenderer:
   m_ObjectHideFlags: 0

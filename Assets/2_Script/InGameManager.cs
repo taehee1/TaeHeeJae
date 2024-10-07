@@ -10,9 +10,12 @@ public class InGameManager : MonoBehaviourPunCallbacks
     [SerializeField] private Transform player1SpawnTransform;  // 1번 플레이어 스폰 오브젝트
     [SerializeField] private Transform player2SpawnTransform;  // 2번 플레이어 스폰 오브젝트
 
+    public static InGameManager instance;
 
     private void Awake()
     {
+        instance = this;
+
         SpawnPlayer();
     }
 
@@ -32,5 +35,10 @@ public class InGameManager : MonoBehaviourPunCallbacks
 
         // 플레이어 생성 (PhotonNetwork.Instantiate 사용)
         PhotonNetwork.Instantiate("Player", spawnPosition, Quaternion.identity);
+    }
+
+    public void EndGame()
+    {
+
     }
 }

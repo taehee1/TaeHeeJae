@@ -6,6 +6,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour, IShootable
 {
     private Rigidbody2D rb;
+    private PhotonView pv;
 
     public float speed = 10f;
     public float damage = 10f;
@@ -15,6 +16,7 @@ public class Bullet : MonoBehaviour, IShootable
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        pv = GetComponent<PhotonView>();
     }
 
     private void Update()
@@ -39,7 +41,7 @@ public class Bullet : MonoBehaviour, IShootable
         PhotonView photonView = collision.gameObject.GetComponent<PhotonView>();
 
         //АјАн
-        if (collision.gameObject.tag == "Player" && !photonView.IsMine)
+        if (collision.gameObject.tag == "Player" && pv.IsMine != photonView.IsMine)
         {
             photonView.RPC("TakeDamage", RpcTarget.AllBuffered, damage);
 
