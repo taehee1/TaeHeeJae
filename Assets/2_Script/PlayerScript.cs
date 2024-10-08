@@ -92,6 +92,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         // 체력을 초기화하고 리스폰 위치로 이동
         currentHp = maxHp;
         transform.position = spawnPosition;
+        hpUI.fillAmount = currentHp / maxHp;
 
         // 추가적인 리스폰 로직 (무적시간, 애니메이션 등)
         photonView.RPC("OnRespawn", RpcTarget.All, photonView.Owner.NickName);

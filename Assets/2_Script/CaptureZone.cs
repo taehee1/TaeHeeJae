@@ -1,5 +1,6 @@
 using Photon.Pun;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,8 +8,8 @@ public class CaptureZone : MonoBehaviourPunCallbacks
 {
     [Header("UI")]
     public GameObject captureKeyImage; // 점령할 때 띄울 UI
-    public Slider player1CaptureGauge; // 플레이어 1의 점령 게이지
-    public Slider player2CaptureGauge; // 플레이어 2의 점령 게이지
+    public Image player1CaptureGauge; // 플레이어 1의 점령 게이지
+    public Image player2CaptureGauge; // 플레이어 2의 점령 게이지
 
     [Header("수치")]
     public float captureTime = 3f; // 점령에 필요한 시간
@@ -77,11 +78,12 @@ public class CaptureZone : MonoBehaviourPunCallbacks
 
             if (player1CurrentCaptureGauge >= maxCaptureGauge)
             {
-                InGameManager.instance.EndGame();
+                InGameManager.instance.photonView.RPC("EndGame", RpcTarget.All, PhotonNetwork.MasterClient.NickName);
             }
             else if (player2CurrentCaptureGauge >= maxCaptureGauge)
             {
-
+                Photon.Realtime.Player player2 = PhotonNetwork.PlayerList.First(p => !p.IsMasterClient);
+                InGameManager.instance.photonView.RPC("EndGame", RpcTarget.All, player2.NickName);
             }
         }
 
@@ -89,8 +91,8 @@ public class CaptureZone : MonoBehaviourPunCallbacks
         UpdateCaptureGauge();
 
         // 슬라이더 UI 업데이트
-        player1CaptureGauge.value = player1CurrentCaptureGauge / maxCaptureGauge;
-        player2CaptureGauge.value = player2CurrentCaptureGauge / maxCaptureGauge;
+        player1CaptureGauge.fillAmount = player1CurrentCaptureGauge / maxCaptureGauge;
+        player2CaptureGauge.fillAmount = player2CurrentCaptureGauge / maxCaptureGauge;
 
         // 주기적으로 게이지 동기화
         if (Time.time - lastSyncTime > syncInterval)
@@ -122,8 +124,8 @@ public class CaptureZone : MonoBehaviourPunCallbacks
     // 게이지가 일정 값 이상 차이가 날 때만 동기화
     private void SyncGaugesIfNeeded()
     {
-        float gaugeDifference1 = Mathf.Abs(player1CurrentCaptureGauge - player1CaptureGauge.value * maxCaptureGauge);
-        float gaugeDifference2 = Mathf.Abs(player2CurrentCaptureGauge - player2CaptureGauge.value * maxCaptureGauge);
+        float gaugeDifference1 = Mathf.Abs(player1CurrentCaptureGauge - player1CaptureGauge.fillAmount * maxCaptureGauge);
+        float gaugeDifference2 = Mathf.Abs(player2CurrentCaptureGauge - player2CaptureGauge.fillAmount * maxCaptureGauge);
 
         if (gaugeDifference1 > gaugeSyncThreshold || gaugeDifference2 > gaugeSyncThreshold)
         {

@@ -567,6 +567,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   virtualCamera: {fileID: 0}
+  hand: {fileID: 4874678785424208505}
 --- !u!1 &5702501535698735083
 GameObject:
   m_ObjectHideFlags: 0

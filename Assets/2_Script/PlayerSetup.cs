@@ -8,7 +8,22 @@ public class PlayerSetup : MonoBehaviour
 {
     public CinemachineVirtualCamera virtualCamera;  // 가상 카메라
 
+    public GameObject hand;
+
+    private PhotonView pv;
+
+    private void Awake()
+    {
+        pv = GetComponent<PhotonView>();
+    }
+
     private void Start()
+    {
+        CameraSetup();
+        PlayerColorSetup();
+    }
+
+    private void CameraSetup()
     {
         PhotonView photonView = GetComponent<PhotonView>();
 
@@ -26,6 +41,36 @@ public class PlayerSetup : MonoBehaviour
             else
             {
                 Debug.LogError("Cinemachine Virtual Camera를 찾을 수 없습니다.");
+            }
+        }
+    }
+
+    private void PlayerColorSetup()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            if (pv.IsMine)
+            {
+                gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                hand.GetComponent<SpriteRenderer>().color = Color.red;
+            }
+            else
+            {
+                gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+                hand.GetComponent<SpriteRenderer>().color = Color.blue;
+            }
+        }
+        else
+        {
+            if (!pv.IsMine)
+            {
+                gameObject.GetComponent<SpriteRenderer>().color = Color.red;
+                hand.GetComponent<SpriteRenderer>().color = Color.red;
+            }
+            else
+            {
+                gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+                hand.GetComponent<SpriteRenderer>().color = Color.blue;
             }
         }
     }

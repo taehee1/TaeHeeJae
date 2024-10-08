@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
+using UnityEngine.UI;
 
 public class InGameManager : MonoBehaviourPunCallbacks
 {
     // Transform으로 스폰 위치를 오브젝트에서 받아오기
     [SerializeField] private Transform player1SpawnTransform;  // 1번 플레이어 스폰 오브젝트
     [SerializeField] private Transform player2SpawnTransform;  // 2번 플레이어 스폰 오브젝트
+
+    public GameObject winPanel;
+    public Text winnerText;
 
     public static InGameManager instance;
 
@@ -37,8 +42,10 @@ public class InGameManager : MonoBehaviourPunCallbacks
         PhotonNetwork.Instantiate("Player", spawnPosition, Quaternion.identity);
     }
 
-    public void EndGame()
+    [PunRPC]
+    public void EndGame(string winner)
     {
-
+        winPanel.SetActive(true);
+        winnerText.text = winner;
     }
 }
