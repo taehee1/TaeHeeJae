@@ -1,9 +1,12 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
+    public PhotonView pv;
+
     public GameObject leftLeg;
     public GameObject rightLeg;
     Rigidbody2D leftLegRb;
@@ -15,6 +18,9 @@ public class Movement : MonoBehaviour
 
     [SerializeField] float speed = 1.5f;
     [SerializeField] float stepWait = 0.5f;
+    [SerializeField] float jumpPower = 5f;
+
+    public bool isGround = true;
 
     // Start is called before the first frame update
     void Start()
@@ -28,23 +34,32 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetAxisRaw("Horizontal") != 0)
+        if (pv.IsMine)
         {
-            if (Input.GetAxisRaw("Horizontal") > 0)
+            if (Input.GetAxisRaw("Horizontal") != 0)
             {
-                animator.Play("Walk_Right");
-                StartCoroutine(MoveRight(stepWait));
+                if (Input.GetAxisRaw("Horizontal") > 0)
+                {
+                    animator.Play("Walk_Right");
+                    StartCoroutine(MoveRight(stepWait));
+                }
+                else
+                {
+                    animator.Play("Walk_Left");
+                    StartCoroutine(MoveLeft(stepWait));
+                }
             }
             else
             {
-                animator.Play("Walk_Left");
-                StartCoroutine(MoveLeft(stepWait));
+                animator.Play("Idle");
+                body.GetComponent<Rigidbody2D>().velocity = Vector2.Lerp(body.GetComponent<Rigidbody2D>().velocity, Vector2.zero, 50 * Time.deltaTime);
             }
-        }
-        else
-        {
-            animator.Play("Idle");
-            body.GetComponent<Rigidbody2D>().velocity = Vector2.Lerp(body.GetComponent<Rigidbody2D>().velocity, Vector2.zero, 50 * Time.deltaTime);
+
+            if (Input.GetKeyDown(KeyCode.Space) && isGround)
+            {
+                body.GetComponent<Rigidbody2D>().AddForce(Vector2.up * jumpPower);
+                isGround = false;
+            }
         }
     }
 
