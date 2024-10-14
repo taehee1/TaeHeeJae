@@ -2449,7 +2449,6 @@ GameObject:
   - component: {fileID: 1356738474}
   - component: {fileID: 1356738475}
   - component: {fileID: 1356738476}
-  - component: {fileID: 1356738477}
   m_Layer: 0
   m_Name: Stickman
   m_TagString: Untagged
@@ -2532,23 +2531,6 @@ MonoBehaviour:
   body: {fileID: 1304658212}
   speed: 1.5
   stepWait: 0.5
---- !u!114 &1356738477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1356738472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa74ba63d07c85b4a8e979560fbdabda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  upperArmHinge: {fileID: 1128881061}
-  mainCamera: {fileID: 1173590252}
-  maxMotorSpeed: 1000
-  maxMotorTorque: 1000
-  angleThreshold: 5
 --- !u!1001 &1387420422
 PrefabInstance:
   m_ObjectHideFlags: 0
