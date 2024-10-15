@@ -38,7 +38,7 @@ public class Bullet : MonoBehaviour, IShootable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PhotonView photonView = collision.gameObject.GetComponent<PhotonView>();
+        PhotonView photonView = collision.gameObject.GetComponentInParent<PhotonView>();
 
         //АјАн
         if (collision.gameObject.tag == "Player" && pv.IsMine != photonView.IsMine)

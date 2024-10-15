@@ -36,7 +36,7 @@ public class PlayerSetup : MonoBehaviour
             // 카메라 설정
             if (virtualCamera != null)
             {
-                virtualCamera.Follow = transform;
+                virtualCamera.Follow = parts[4].transform;
             }
             else
             {

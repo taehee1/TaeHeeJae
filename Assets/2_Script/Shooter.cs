@@ -6,9 +6,13 @@ using UnityEngine;
 public class Shooter : MonoBehaviour
 {
     [SerializeField] private List<GameObject> orbPrefabs;
-    [SerializeField] private Transform spawnPos;
     [SerializeField] private int orbIndex = 0; // 원하는 오브 프리팹의 인덱스를 선택합니다.
     [SerializeField] private float reboundForce;
+    [SerializeField] private float delay;
+
+    private bool canShoot = true;
+
+    [SerializeField] private Transform spawnPos;
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject gun;
     [SerializeField] private GameObject hand;
@@ -43,7 +47,7 @@ public class Shooter : MonoBehaviour
 
     private void Shoot()
     {
-        if (player.GetComponent<PhotonView>().IsMine)
+        if (player.GetComponent<PhotonView>().IsMine && canShoot)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -61,9 +65,17 @@ public class Shooter : MonoBehaviour
 
                 audioSource.Play();
                 hand.GetComponent<Rigidbody2D>().AddForce(Vector2.up * reboundForce);
+                StartCoroutine(ShootCooldown(delay));
             }
         }
-    }   
+    }
+
+    IEnumerator ShootCooldown(float seconds)
+    {
+        canShoot = false;
+        yield return new WaitForSeconds(seconds);
+        canShoot = true;
+    }
 
     [PunRPC]
     void GunFlip()
