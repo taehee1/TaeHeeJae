@@ -8,7 +8,7 @@ public class PlayerSetup : MonoBehaviour
 {
     public CinemachineVirtualCamera virtualCamera;  // 가상 카메라
 
-    public GameObject hand;
+    public GameObject[] parts;
 
     private PhotonView pv;
 
@@ -51,26 +51,34 @@ public class PlayerSetup : MonoBehaviour
         {
             if (pv.IsMine)
             {
-                gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-                hand.GetComponent<SpriteRenderer>().color = Color.red;
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    parts[i].GetComponent<SpriteRenderer>().color = Color.red;
+                }
             }
             else
             {
-                gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-                hand.GetComponent<SpriteRenderer>().color = Color.blue;
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    parts[i].GetComponent<SpriteRenderer>().color = Color.blue;
+                }
             }
         }
         else
         {
             if (!pv.IsMine)
             {
-                gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-                hand.GetComponent<SpriteRenderer>().color = Color.red;
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    parts[i].GetComponent<SpriteRenderer>().color = Color.red;
+                }
             }
             else
             {
-                gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-                hand.GetComponent<SpriteRenderer>().color = Color.blue;
+                for (int i = 0; i < parts.Length; i++)
+                {
+                    parts[i].GetComponent<SpriteRenderer>().color = Color.blue;
+                }
             }
         }
     }
