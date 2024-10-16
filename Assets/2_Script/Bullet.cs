@@ -11,6 +11,8 @@ public class Bullet : MonoBehaviour, IShootable
     public float speed = 10f;
     public float damage = 10f;
 
+    private bool isDestroyed = false; // 파괴 여부 플래그
+
     Vector3 lastVelocity;
 
     private void Awake()
@@ -38,19 +40,38 @@ public class Bullet : MonoBehaviour, IShootable
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (isDestroyed) return; // 이미 파괴된 경우 처리하지 않음
+
+        Debug.Log("충돌 감지: " + collision.gameObject.name); // 충돌한 객체의 이름 출력
+
         PhotonView photonView = collision.gameObject.GetComponentInParent<PhotonView>();
 
-        //공격
-        if (collision.gameObject.tag == "Player" && pv.IsMine != photonView.IsMine)
+        // 공격
+        if (collision.gameObject.CompareTag("Player") && pv.IsMine != photonView.IsMine)
         {
-            photonView.RPC("TakeDamage", RpcTarget.AllBuffered, damage);
-            //collision.gameObject.GetComponentInParent<Movement>().StartCoroutine(Movement.instance.Stun(0.2f));
+            Debug.Log("상대에게 맞음: " + collision.gameObject.name); // 상대에게 맞았을 때 출력
 
-            PhotonNetwork.Destroy(gameObject);
+            // 부모 객체에서 Hp 스크립트를 찾기
+            Hp hp = collision.gameObject.GetComponentInParent<Hp>();
+            if (hp != null)
+            {
+                hp.photonView.RPC("TakeDamage", RpcTarget.AllBuffered, damage);
+                Debug.Log("데미지 전송: " + damage); // 데미지 전송 시 출력
+            }
+
+            if (pv.IsMine && !isDestroyed)
+            {
+                isDestroyed = true; // 파괴 플래그 설정
+                PhotonNetwork.Destroy(gameObject);
+            }
         }
-        else if (collision.gameObject.tag == "Ground")
+        else if (collision.gameObject.CompareTag("Ground"))
         {
-            PhotonNetwork.Destroy(gameObject);
+            if (pv.IsMine && !isDestroyed)
+            {
+                isDestroyed = true; // 파괴 플래그 설정
+                PhotonNetwork.Destroy(gameObject);
+            }
         }
     }
 }

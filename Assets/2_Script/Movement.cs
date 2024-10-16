@@ -19,6 +19,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float speed = 1.5f;
     [SerializeField] float stepWait = 0.5f;
     [SerializeField] float jumpPower = 5f;
+    [SerializeField] float gravityForce = 5f;
 
     public bool isGround = true;
     private bool canMove = true;
@@ -53,18 +54,21 @@ public class Movement : MonoBehaviour
             {
                 if (Input.GetAxisRaw("Horizontal") > 0)
                 {
-                    animator.Play("Walk_Right");
+                    animator.SetBool("Walk_R", true);
                     StartCoroutine(MoveRight(stepWait));
+                    animator.SetBool("Walk_L", false);
                 }
                 else
                 {
-                    animator.Play("Walk_Left");
+                    animator.SetBool("Walk_L", true);
                     StartCoroutine(MoveLeft(stepWait));
+                    animator.SetBool("Walk_R", false);
                 }
             }
             else
             {
-                animator.Play("Idle");
+                animator.SetBool("Walk_R", false);
+                animator.SetBool("Walk_L", false);
                 body.GetComponent<Rigidbody2D>().velocity = Vector2.Lerp(body.GetComponent<Rigidbody2D>().velocity, Vector2.zero, 50 * Time.deltaTime);
             }
 

@@ -52,6 +52,7 @@ MonoBehaviour:
   - SyncCaptureState
   - PartsBalance
   - SyncRigidbody
+  - UpdateRotation
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

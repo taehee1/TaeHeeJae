@@ -39,7 +39,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
         }
 
         // 플레이어 생성 (PhotonNetwork.Instantiate 사용)
-        PhotonNetwork.Instantiate("Stickman", spawnPosition, Quaternion.identity);
+        PhotonNetwork.Instantiate("Head", spawnPosition, Quaternion.identity);
     }
 
     [PunRPC]
