@@ -50,6 +50,8 @@ MonoBehaviour:
   - StartCapture
   - StopCapture
   - SyncCaptureState
+  - PartsBalance
+  - SyncRigidbody
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

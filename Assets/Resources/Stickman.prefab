@@ -242,7 +242,7 @@ GameObject:
   - component: {fileID: 9084023504208827498}
   - component: {fileID: 7810714918141140325}
   - component: {fileID: 3473958085571850705}
-  - component: {fileID: 5658245762053070398}
+  - component: {fileID: 2216426903479710274}
   m_Layer: 3
   m_Name: LeftUpperLeg
   m_TagString: Untagged
@@ -418,7 +418,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &5658245762053070398
+--- !u!114 &2216426903479710274
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -427,13 +427,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 971403293485931124}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1599588254311267490
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,7 +454,7 @@ GameObject:
   - component: {fileID: 5721520853493788754}
   - component: {fileID: 6640242539896159770}
   - component: {fileID: 7785441443693175373}
-  - component: {fileID: 5582540387052118468}
+  - component: {fileID: 8369300359806972764}
   m_Layer: 3
   m_Name: Head
   m_TagString: Untagged
@@ -625,7 +631,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.00000047683716}
   m_Size: {x: 1, y: 1}
   m_Direction: 0
---- !u!114 &5582540387052118468
+--- !u!114 &8369300359806972764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -634,13 +640,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1599588254311267490}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 0}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &2064927053063497969
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,7 +668,7 @@ GameObject:
   - component: {fileID: 6100028140310877142}
   - component: {fileID: 3292979239064352684}
   - component: {fileID: 3233203931601719542}
-  - component: {fileID: 478071142448510430}
+  - component: {fileID: 1367073909660458274}
   m_Layer: 3
   m_Name: LeftLowerLeg
   m_TagString: Untagged
@@ -831,7 +844,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &478071142448510430
+--- !u!114 &1367073909660458274
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -840,13 +853,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 2064927053063497969}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 0}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &2709704486634478124
 GameObject:
   m_ObjectHideFlags: 0
@@ -860,7 +880,7 @@ GameObject:
   - component: {fileID: 5261870200970940846}
   - component: {fileID: 312473685055593173}
   - component: {fileID: 5899260639758680767}
-  - component: {fileID: 3019121917010366182}
+  - component: {fileID: 6896099601837122500}
   m_Layer: 3
   m_Name: LeftUpperArm
   m_TagString: Untagged
@@ -1022,7 +1042,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.0000001, y: 2.0000005}
   m_Direction: 0
---- !u!114 &3019121917010366182
+--- !u!114 &6896099601837122500
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1031,13 +1051,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2709704486634478124}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &3565076524571490539
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,7 +1077,7 @@ GameObject:
   - component: {fileID: 8307581439257848415}
   - component: {fileID: 2891531605936619941}
   - component: {fileID: 6082712046131458016}
-  - component: {fileID: 5540698145359714315}
+  - component: {fileID: 8075018335326155403}
   m_Layer: 3
   m_Name: Body
   m_TagString: Untagged
@@ -1202,7 +1228,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &5540698145359714315
+--- !u!114 &8075018335326155403
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1211,13 +1237,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 3565076524571490539}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 0}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &3628452612962755856
 GameObject:
   m_ObjectHideFlags: 0
@@ -1234,7 +1267,7 @@ GameObject:
   - component: {fileID: 7233334686665064688}
   - component: {fileID: 4620860495383614520}
   - component: {fileID: 3805371476082432539}
-  - component: {fileID: 1891673075762784243}
+  - component: {fileID: 5042156711546824040}
   m_Layer: 3
   m_Name: RightUpperArm
   m_TagString: Untagged
@@ -1446,7 +1479,7 @@ MonoBehaviour:
     m_DefaultLocalRotations: []
     m_StoredLocalRotations: []
   m_Flip: 0
---- !u!114 &1891673075762784243
+--- !u!114 &5042156711546824040
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1455,13 +1488,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3628452612962755856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &4035894192010309964
 GameObject:
   m_ObjectHideFlags: 0
@@ -1475,7 +1514,7 @@ GameObject:
   - component: {fileID: 4453148926970692310}
   - component: {fileID: 4975519195625521679}
   - component: {fileID: 1146269229394880595}
-  - component: {fileID: 6660660818426000575}
+  - component: {fileID: 1046002090599230445}
   m_Layer: 3
   m_Name: LeftLowerArm
   m_TagString: Untagged
@@ -1637,7 +1676,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.0000019073486}
   m_Size: {x: 1.0000001, y: 2.0000005}
   m_Direction: 0
---- !u!114 &6660660818426000575
+--- !u!114 &1046002090599230445
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1646,13 +1685,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 4035894192010309964}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &4448224008987195142
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,7 +1743,7 @@ GameObject:
   - component: {fileID: 6628865338814763372}
   - component: {fileID: 3087759671417685866}
   - component: {fileID: 1610542728855273666}
-  - component: {fileID: 3494756772638330715}
+  - component: {fileID: 4894874173710661885}
   m_Layer: 3
   m_Name: RightUpperLeg
   m_TagString: Untagged
@@ -1874,7 +1919,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &3494756772638330715
+--- !u!114 &4894874173710661885
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1883,13 +1928,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 4872468349311735055}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 0}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &6310170050346997893
 GameObject:
   m_ObjectHideFlags: 0
@@ -2009,7 +2061,7 @@ GameObject:
   - component: {fileID: 2482700548045404978}
   - component: {fileID: 1584392497991477021}
   - component: {fileID: 2013149935701486868}
-  - component: {fileID: 8581447364365156280}
+  - component: {fileID: 2492987872528120895}
   m_Layer: 3
   m_Name: RightLowerArm
   m_TagString: Untagged
@@ -2172,7 +2224,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1.0000001, y: 2.0000005}
   m_Direction: 0
---- !u!114 &8581447364365156280
+--- !u!114 &2492987872528120895
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2181,13 +2233,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 7732748897986168050}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 0}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &8111572637225802951
 GameObject:
   m_ObjectHideFlags: 0
@@ -2203,7 +2262,7 @@ GameObject:
   - component: {fileID: 6410502359029041658}
   - component: {fileID: 7558561447596132334}
   - component: {fileID: 2133120455662154384}
-  - component: {fileID: 6688274756588004597}
+  - component: {fileID: 3206174314302569261}
   m_Layer: 3
   m_Name: RightLowerLeg
   m_TagString: Untagged
@@ -2392,7 +2451,7 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
---- !u!114 &6688274756588004597
+--- !u!114 &3206174314302569261
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2401,13 +2460,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 8111572637225802951}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e7cb724808c322458aa4d15f5035fa9, type: 3}
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents:
+  - {fileID: 0}
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &8399985689324321151
 GameObject:
   m_ObjectHideFlags: 0

@@ -44,6 +44,7 @@ public class Bullet : MonoBehaviour, IShootable
         if (collision.gameObject.tag == "Player" && pv.IsMine != photonView.IsMine)
         {
             photonView.RPC("TakeDamage", RpcTarget.AllBuffered, damage);
+            //collision.gameObject.GetComponentInParent<Movement>().StartCoroutine(Movement.instance.Stun(0.2f));
 
             PhotonNetwork.Destroy(gameObject);
         }

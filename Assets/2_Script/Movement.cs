@@ -21,6 +21,14 @@ public class Movement : MonoBehaviour
     [SerializeField] float jumpPower = 5f;
 
     public bool isGround = true;
+    private bool canMove = true;
+
+    //public static Movement instance;
+
+    private void Awake()
+    {
+        //instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +42,11 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!canMove)
+        {
+            return;
+        }
+
         if (pv.IsMine)
         {
             if (Input.GetAxisRaw("Horizontal") != 0)
@@ -75,5 +88,12 @@ public class Movement : MonoBehaviour
         rightLegRb.AddForce(Vector2.left * (speed * 1000) * Time.deltaTime);
         yield return new WaitForSeconds(seconds);
         leftLegRb.AddForce(Vector2.left * (speed * 1000) * Time.deltaTime);
+    }
+
+    public IEnumerator Stun(float seconds)
+    {
+        canMove = false;
+        yield return new WaitForSeconds(seconds);
+        canMove = true;
     }
 }

@@ -1267,6 +1267,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1046002090599230445, guid: 4df3923bb6515cb47a8999e1a7477238, type: 3}
+      propertyPath: sceneViewId
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1367073909660458274, guid: 4df3923bb6515cb47a8999e1a7477238, type: 3}
+      propertyPath: sceneViewId
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 2142142075119552000, guid: 4df3923bb6515cb47a8999e1a7477238, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.3056874
@@ -1307,11 +1315,43 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2216426903479710274, guid: 4df3923bb6515cb47a8999e1a7477238, type: 3}
+      propertyPath: sceneViewId
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 2492987872528120895, guid: 4df3923bb6515cb47a8999e1a7477238, type: 3}
+      propertyPath: sceneViewId
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3206174314302569261, guid: 4df3923bb6515cb47a8999e1a7477238, type: 3}
+      propertyPath: sceneViewId
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4894874173710661885, guid: 4df3923bb6515cb47a8999e1a7477238, type: 3}
+      propertyPath: sceneViewId
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5042156711546824040, guid: 4df3923bb6515cb47a8999e1a7477238, type: 3}
+      propertyPath: sceneViewId
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 5721051775678171330, guid: 4df3923bb6515cb47a8999e1a7477238, type: 3}
       propertyPath: sceneViewId
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6485567719865728448, guid: 4df3923bb6515cb47a8999e1a7477238, type: 3}
+      propertyPath: sceneViewId
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6896099601837122500, guid: 4df3923bb6515cb47a8999e1a7477238, type: 3}
+      propertyPath: sceneViewId
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 8075018335326155403, guid: 4df3923bb6515cb47a8999e1a7477238, type: 3}
+      propertyPath: sceneViewId
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8369300359806972764, guid: 4df3923bb6515cb47a8999e1a7477238, type: 3}
       propertyPath: sceneViewId
       value: 6
       objectReference: {fileID: 0}
