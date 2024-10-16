@@ -96,8 +96,7 @@ public class Movement : MonoBehaviour
 
     public IEnumerator Stun(float seconds)
     {
-        canMove = false;
+        body.GetComponent<Rigidbody2D>().AddForce(Vector2.zero);
         yield return new WaitForSeconds(seconds);
-        canMove = true;
     }
 }
