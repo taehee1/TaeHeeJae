@@ -16,5 +16,6 @@ public enum MapType
     Move,
     Lava,
     Ice,
-    Forest
+    Forest,
+    Push
 }
