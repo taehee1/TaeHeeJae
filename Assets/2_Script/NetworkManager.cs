@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
@@ -138,6 +139,17 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             // 방의 모든 플레이어를 특정 씬으로 전환
             PhotonNetwork.LoadLevel("InGame"); // "GameScene"을 원하는 씬 이름으로 교체
         }
+    }
+
+    public void LeftRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
+    public override void OnLeftRoom()
+    {
+        roomPanel.SetActive(false);
+        lobbyPanel.SetActive(true);
     }
     #endregion
 

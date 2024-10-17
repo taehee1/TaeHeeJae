@@ -18,6 +18,7 @@ public class Shooter : MonoBehaviour
     [SerializeField] private GameObject hand;
 
     public PhotonView pv;
+    public Movement movement;
 
     private float lastAngle;
     private AudioSource audioSource;
@@ -49,7 +50,7 @@ public class Shooter : MonoBehaviour
     {
         if (player.GetComponent<PhotonView>().IsMine && canShoot)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && movement.canMove)
             {
                 Vector2 direction = ((Vector2)spawnPos.position - (Vector2)gun.transform.position).normalized; // 오브젝트 위치를 사용하여 방향을 계산합니다.
                 GameObject orbInstance = PhotonNetwork.Instantiate("Bullet", spawnPos.position, Quaternion.identity);

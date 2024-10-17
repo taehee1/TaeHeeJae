@@ -44,6 +44,13 @@ public class CaptureZone : MonoBehaviourPunCallbacks
             if (Input.GetKey(KeyCode.E))
             {
                 currentCaptureTime += Time.deltaTime;
+                captureKeyImage.GetComponent<Image>().fillAmount = 1 - (currentCaptureTime / captureTime);
+            }
+
+            if (Input.GetKeyUp(KeyCode.E))
+            {
+                currentCaptureTime = 0;
+                captureKeyImage.GetComponent<Image>().fillAmount = 1;
             }
 
             if (currentCaptureTime >= captureTime)

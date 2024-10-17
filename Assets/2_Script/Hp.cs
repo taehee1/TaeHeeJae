@@ -11,6 +11,7 @@ public class Hp : MonoBehaviourPunCallbacks
     [SerializeField] private float maxHp = 100;
 
     private float respawnTime;
+    private bool isDead;
 
     private PhotonView pv; // PhotonView 변수 추가
     private Movement movement;
@@ -30,12 +31,27 @@ public class Hp : MonoBehaviourPunCallbacks
         if (respawnTime > 0)
         {
             respawnTime -= Time.deltaTime;
-            InGameManager.instance.deathUI.GetComponentInChildren<Text>().text = "RESPAWN : " + Mathf.Ceil(respawnTime).ToString();
+            InGameManager.instance.respawnText.text = "RESPAWN " + Mathf.Ceil(respawnTime).ToString();
 
             if (respawnTime <= 0)
             {
-                photonView.RPC("OnRespawn", RpcTarget.All, photonView.Owner.NickName);
+                for (int i = 0; i < 4; i++)
+                {
+                    PlayerSetup.instance.parts[i].GetComponent<Balance>().force = 10000;
+                }
+
+                PlayerSetup.instance.parts[4].GetComponent<Balance>().force = 300;
+                PlayerSetup.instance.parts[7].GetComponent<Balance>().force = 300;
+
+                InGameManager.instance.deathUI.SetActive(false);
+                pv.RPC("OnRespawn", RpcTarget.All, photonView.Owner.NickName);
             }
+        }
+
+        if (transform.position.y < InGameManager.instance.blackZone.transform.position.y)
+        {
+            transform.position = new Vector2(transform.position.x, transform.position.y + 20);
+            pv.RPC("TakeDamage", RpcTarget.AllBuffered, 20);
         }
     }
 
@@ -48,12 +64,13 @@ public class Hp : MonoBehaviourPunCallbacks
 
         UpdateHpUI(); // HP UI 업데이트
 
-        pv.RPC("RPC_ShakeCamera", PhotonNetwork.LocalPlayer);
+        gameObject.GetComponent<CameraShake>().RPC_ShakeCamera();
         movement.StartCoroutine("Stun", 0.2f);
 
-        if (currentHp <= 0)
+        if (currentHp <= 0 && !isDead)
         {
             Die();
+            isDead = true;
         }
     }
 
@@ -61,8 +78,19 @@ public class Hp : MonoBehaviourPunCallbacks
     {
         Debug.Log("플레이어 사망");
 
-        InGameManager.instance.deathUI.SetActive(true);
+        if (pv.IsMine)
+        {
+            InGameManager.instance.deathUI.SetActive(true);
+        }
         respawnTime = 10f;
+
+        for (int i = 0; i < 5; i++)
+        {
+            PlayerSetup.instance.parts[i].GetComponent<Balance>().force = 0;
+        }
+
+        PlayerSetup.instance.parts[7].GetComponent<Balance>().force = 0;
+        movement.canMove = false;
     }
 
     [PunRPC]
@@ -72,8 +100,10 @@ public class Hp : MonoBehaviourPunCallbacks
         // 필요하다면 다른 클라이언트에서 플레이어의 리스폰 상태를 처리
         currentHp = maxHp;
         transform.position = spawnPosition;
-
         UpdateHpUI(); // 다른 클라이언트에서 HP UI를 업데이트
+
+        movement.canMove = true;
+        isDead = false;
     }
 
     private void UpdateHpUI()

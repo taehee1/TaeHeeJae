@@ -1,9 +1,11 @@
+using Photon.Pun;
 using UnityEngine;
 
 public class LavaBall : MonoBehaviour
 {
     public float jumpForce = 5.0f; // 튀어오르는 힘
     public float interval = 2.0f; // 튀어오르는 간격
+    public float damage = 10f;
 
     void Start()
     {
@@ -19,10 +21,12 @@ public class LavaBall : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // 플레이어와 충돌 시 LavaBall을 사라지게 함
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.tag == "Player")
         {
-            Destroy(gameObject); // LavaBall 오브젝트 삭제
+            if (collision.gameObject.GetComponent<PhotonView>() != null && collision.gameObject.GetComponent<PhotonView>().IsMine)
+            {
+                collision.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.AllBuffered, damage);
+            }
         }
     }
 }

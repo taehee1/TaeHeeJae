@@ -15,6 +15,7 @@ public class Movement : MonoBehaviour
     public GameObject body;
 
     private Animator animator;
+    private AudioSource audioSource;
 
     [SerializeField] float speed = 1.5f;
     [SerializeField] float stepWait = 0.5f;
@@ -22,7 +23,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float gravityForce = 5f;
 
     public bool isGround = true;
-    private bool canMove = true;
+    public bool canMove = true;
 
     //public static Movement instance;
 

@@ -5,9 +5,11 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class InGameManager : MonoBehaviourPunCallbacks
 {
+    public CinemachineVirtualCamera virtualCamera;  // 가상 카메라
     // Transform으로 스폰 위치를 오브젝트에서 받아오기
     [SerializeField] private Transform player1SpawnTransform;  // 1번 플레이어 스폰 오브젝트
     [SerializeField] private Transform player2SpawnTransform;  // 2번 플레이어 스폰 오브젝트
@@ -16,8 +18,10 @@ public class InGameManager : MonoBehaviourPunCallbacks
 
     private Vector3 spawnPosition;
 
+    public GameObject blackZone;
     public GameObject winPanel;
     public GameObject deathUI;
+    public TextMeshProUGUI respawnText;
     public Text winnerText;
 
     public Map[] map;
@@ -29,6 +33,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
         instance = this;
 
         pv = GetComponent<PhotonView>();
+        virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
     }
 
     private void Start()
@@ -68,16 +73,19 @@ public class InGameManager : MonoBehaviourPunCallbacks
                 //무브
                 player1SpawnTransform = map[random].spawnPoint1.transform;
                 player2SpawnTransform = map[random].spawnPoint2.transform;
+                virtualCamera.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = map[random].camerazone.GetComponent<PolygonCollider2D>();
                 break;
             case MapType.Lava :
                 //라바
                 player1SpawnTransform = map[random].spawnPoint1.transform;
                 player2SpawnTransform = map[random].spawnPoint2.transform;
+                virtualCamera.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = map[random].camerazone.GetComponent<PolygonCollider2D>();
                 break;
             case MapType.Ice :
                 //희발련
                 player1SpawnTransform = map[random].spawnPoint1.transform;
                 player2SpawnTransform = map[random].spawnPoint2.transform;
+                virtualCamera.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = map[random].camerazone.GetComponent<PolygonCollider2D>();
                 break;
         }
 

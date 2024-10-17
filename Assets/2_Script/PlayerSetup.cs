@@ -11,10 +11,12 @@ public class PlayerSetup : MonoBehaviour
     public GameObject[] parts;
 
     private PhotonView pv;
+    public static PlayerSetup instance;
 
     private void Awake()
     {
         pv = GetComponent<PhotonView>();
+        instance = this;
     }
 
     private void Start()
