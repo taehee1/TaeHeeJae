@@ -34,7 +34,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     private void Awake()
     {
         PhotonNetwork.PhotonServerSettings.AppSettings.FixedRegion = "kr";
-        Screen.SetResolution(960, 540, false);
+        Screen.SetResolution(1920, 1080, true);
         instance = this;
         nicknameInput.text = null;
     }
@@ -98,6 +98,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         print("¿¬°á²÷±è");
         lobbyPanel.SetActive(false);
         mainPanel.SetActive(true);
+    }
+
+    public void Exit()
+    {
+        Application.Quit();
     }
     #endregion
 

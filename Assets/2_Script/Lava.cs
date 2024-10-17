@@ -9,9 +9,9 @@ public class Lava : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player" && collision.gameObject.GetComponent<PhotonView>().IsMine)
+        if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.AllBuffered, damage);
+            collision.gameObject.GetComponentInParent<PhotonView>().RPC("TakeDamage", RpcTarget.AllBuffered, damage);
         }
     }
 }

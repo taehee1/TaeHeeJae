@@ -64,7 +64,10 @@ public class Hp : MonoBehaviourPunCallbacks
 
         UpdateHpUI(); // HP UI 업데이트
 
-        gameObject.GetComponent<CameraShake>().RPC_ShakeCamera();
+        if (pv.IsMine)
+        {
+            gameObject.GetComponent<CameraShake>().RPC_ShakeCamera();
+        }
         movement.StartCoroutine("Stun", 0.2f);
 
         if (currentHp <= 0 && !isDead)

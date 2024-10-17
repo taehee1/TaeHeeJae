@@ -31,6 +31,8 @@ public class CaptureZone : MonoBehaviourPunCallbacks
     private float lastSyncTime; // 마지막으로 동기화된 시간
     private const float syncInterval = 0.5f; // 동기화 간격 (0.5초)
 
+    private bool isEnd;
+
     private void Awake()
     {
         pv = GetComponent<PhotonView>();
@@ -83,12 +85,14 @@ public class CaptureZone : MonoBehaviourPunCallbacks
                 }
             }
 
-            if (player1CurrentCaptureGauge >= maxCaptureGauge)
+            if (player1CurrentCaptureGauge >= maxCaptureGauge && !isEnd)
             {
+                isEnd = true;
                 InGameManager.instance.photonView.RPC("EndGame", RpcTarget.All, PhotonNetwork.MasterClient.NickName);
             }
-            else if (player2CurrentCaptureGauge >= maxCaptureGauge)
+            else if (player2CurrentCaptureGauge >= maxCaptureGauge && !isEnd)
             {
+                isEnd = true;
                 Photon.Realtime.Player player2 = PhotonNetwork.PlayerList.First(p => !p.IsMasterClient);
                 InGameManager.instance.photonView.RPC("EndGame", RpcTarget.All, player2.NickName);
             }

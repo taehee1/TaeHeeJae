@@ -17,6 +17,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
     private PhotonView pv;
 
     private Vector3 spawnPosition;
+    private bool isPlayerSpawned = false;  // 플레이어가 스폰되었는지 여부
 
     public GameObject blackZone;
     public GameObject winPanel;
@@ -47,8 +48,8 @@ public class InGameManager : MonoBehaviourPunCallbacks
 
     private void SpawnPlayer()
     {
+        if (isPlayerSpawned) return;  // 이미 스폰된 경우 중복 방지
 
-        // 플레이어 리스트에서 자신의 순서에 맞는 스폰 위치를 지정
         if (PhotonNetwork.IsMasterClient) // 방을 만든 플레이어
         {
             spawnPosition = player1SpawnTransform.position; // 1번 플레이어 스폰 위치
@@ -58,31 +59,27 @@ public class InGameManager : MonoBehaviourPunCallbacks
             spawnPosition = player2SpawnTransform.position; // 2번 플레이어 스폰 위치
         }
 
-        // 플레이어 생성 (PhotonNetwork.Instantiate 사용)
         PhotonNetwork.Instantiate("Head", spawnPosition, Quaternion.identity);
+        isPlayerSpawned = true;  // 스폰되었음을 기록
     }
 
     [PunRPC]
     public void randomMap(int random)
     {
+        // 모든 맵 비활성화
+        foreach (var m in map)
+        {
+            m.gameObject.SetActive(false);
+        }
+
+        // 랜덤으로 선택된 맵 활성화
         map[random].gameObject.SetActive(true);
 
         switch (map[random].type)
         {
-            case MapType.Move :
-                //무브
-                player1SpawnTransform = map[random].spawnPoint1.transform;
-                player2SpawnTransform = map[random].spawnPoint2.transform;
-                virtualCamera.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = map[random].camerazone.GetComponent<PolygonCollider2D>();
-                break;
-            case MapType.Lava :
-                //라바
-                player1SpawnTransform = map[random].spawnPoint1.transform;
-                player2SpawnTransform = map[random].spawnPoint2.transform;
-                virtualCamera.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = map[random].camerazone.GetComponent<PolygonCollider2D>();
-                break;
-            case MapType.Ice :
-                //희발련
+            case MapType.Move:
+            case MapType.Lava:
+            case MapType.Ice:
                 player1SpawnTransform = map[random].spawnPoint1.transform;
                 player2SpawnTransform = map[random].spawnPoint2.transform;
                 virtualCamera.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = map[random].camerazone.GetComponent<PolygonCollider2D>();
@@ -97,5 +94,11 @@ public class InGameManager : MonoBehaviourPunCallbacks
     {
         winPanel.SetActive(true);
         winnerText.text = winner;
+        Invoke("Restart", 3f);
+    }
+
+    public void Restart()
+    {
+        PhotonNetwork.LoadLevel("InGame");
     }
 }

@@ -23,9 +23,9 @@ public class LavaBall : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            if (collision.gameObject.GetComponent<PhotonView>() != null && collision.gameObject.GetComponent<PhotonView>().IsMine)
+            if (collision.gameObject.GetComponentInParent<PhotonView>() != null && collision.gameObject.GetComponent<PhotonView>().IsMine)
             {
-                collision.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.AllBuffered, damage);
+                collision.gameObject.GetComponentInParent<PhotonView>().RPC("TakeDamage", RpcTarget.AllBuffered, damage);
             }
         }
     }

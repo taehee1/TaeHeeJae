@@ -905,7 +905,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1309389155}
         m_TargetAssemblyTypeName: NetworkManager, Assembly-CSharp
-        m_MethodName: Disconnect
+        m_MethodName: Exit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2985,7 +2985,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: aae70e69bd204bc43859944331b57ef5, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
