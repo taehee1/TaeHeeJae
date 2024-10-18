@@ -80,6 +80,8 @@ public class InGameManager : MonoBehaviourPunCallbacks
             case MapType.Move:
             case MapType.Lava:
             case MapType.Ice:
+            case MapType.Push:
+            case MapType.Forest:
                 player1SpawnTransform = map[random].spawnPoint1.transform;
                 player2SpawnTransform = map[random].spawnPoint2.transform;
                 virtualCamera.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = map[random].camerazone.GetComponent<PolygonCollider2D>();
