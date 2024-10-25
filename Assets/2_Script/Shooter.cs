@@ -9,6 +9,7 @@ public class Shooter : MonoBehaviour
     [SerializeField] private int orbIndex = 0; // 원하는 오브 프리팹의 인덱스를 선택합니다.
     [SerializeField] private float reboundForce;
     [SerializeField] private float delay;
+    [SerializeField] private float bulletDamage;
 
     private bool canShoot = true;
 
@@ -50,14 +51,17 @@ public class Shooter : MonoBehaviour
     {
         if (player.GetComponent<PhotonView>().IsMine && canShoot)
         {
-            if (Input.GetMouseButtonDown(0) && movement.canMove)
+            if (Input.GetMouseButton(0) && movement.canMove)
             {
+                StartCoroutine(ShootCooldown(delay));
+
                 Vector2 direction = ((Vector2)spawnPos.position - (Vector2)gun.transform.position).normalized; // 오브젝트 위치를 사용하여 방향을 계산합니다.
                 GameObject orbInstance = PhotonNetwork.Instantiate("Bullet", spawnPos.position, Quaternion.identity);
                 IShootable orb = orbInstance.GetComponent<IShootable>();
                 if (orb != null)
                 {
                     orb.Shoot(direction);
+                    orbInstance.GetComponent<Bullet>().damage = bulletDamage;
                 }
                 else
                 {
@@ -66,7 +70,6 @@ public class Shooter : MonoBehaviour
 
                 audioSource.Play();
                 hand.GetComponent<Rigidbody2D>().AddForce(Vector2.up * reboundForce);
-                StartCoroutine(ShootCooldown(delay));
             }
         }
     }

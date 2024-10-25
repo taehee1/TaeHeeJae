@@ -85,6 +85,7 @@ public class CaptureZone : MonoBehaviourPunCallbacks
                 }
             }
 
+        }
             if (player1CurrentCaptureGauge >= maxCaptureGauge && !isEnd)
             {
                 isEnd = true;
@@ -96,7 +97,6 @@ public class CaptureZone : MonoBehaviourPunCallbacks
                 Photon.Realtime.Player player2 = PhotonNetwork.PlayerList.First(p => !p.IsMasterClient);
                 InGameManager.instance.photonView.RPC("EndGame", RpcTarget.All, player2.NickName);
             }
-        }
 
         // 게이지를 매 프레임 업데이트
         UpdateCaptureGauge();

@@ -44,6 +44,8 @@ public class InGameManager : MonoBehaviourPunCallbacks
             int random = Random.Range(0, map.Length);
             pv.RPC("randomMap", RpcTarget.All, random);
         }
+
+        Invoke("SpawnPlayer", 2);
     }
 
     private void SpawnPlayer()
@@ -87,8 +89,6 @@ public class InGameManager : MonoBehaviourPunCallbacks
                 virtualCamera.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = map[random].camerazone.GetComponent<PolygonCollider2D>();
                 break;
         }
-
-        SpawnPlayer();
     }
 
     [PunRPC]
@@ -99,7 +99,13 @@ public class InGameManager : MonoBehaviourPunCallbacks
         Invoke("Restart", 3f);
     }
 
-    public void Restart()
+    private void Restart()
+    {
+        pv.RPC("Restart_RPC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void Restart_RPC()
     {
         PhotonNetwork.LoadLevel("InGame");
     }

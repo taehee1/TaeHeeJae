@@ -50,8 +50,9 @@ public class Hp : MonoBehaviourPunCallbacks
 
         if (transform.position.y < InGameManager.instance.blackZone.transform.position.y)
         {
+            photonView.RPC("TakeDamage", RpcTarget.AllBuffered, 20f);
             transform.position = new Vector2(transform.position.x, transform.position.y + 20);
-            pv.RPC("TakeDamage", RpcTarget.AllBuffered, 20);
+            movement.body.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
     }
 
