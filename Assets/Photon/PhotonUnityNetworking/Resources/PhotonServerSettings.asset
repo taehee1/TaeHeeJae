@@ -55,6 +55,7 @@ MonoBehaviour:
   - UpdateRotation
   - randomMap
   - Restart_RPC
+  - CapturingUIOn
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

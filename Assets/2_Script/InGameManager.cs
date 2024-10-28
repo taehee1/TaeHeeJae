@@ -6,6 +6,7 @@ using Photon.Realtime;
 using TMPro;
 using UnityEngine.UI;
 using Cinemachine;
+using System.Linq;
 
 public class InGameManager : MonoBehaviourPunCallbacks
 {
@@ -20,6 +21,11 @@ public class InGameManager : MonoBehaviourPunCallbacks
     private bool isPlayerSpawned = false;  // 플레이어가 스폰되었는지 여부
 
     public GameObject blackZone;
+    [Header("UI")]
+    public GameObject startUI;
+    public TextMeshProUGUI player1NameText;
+    public TextMeshProUGUI player2NameText;
+
     public GameObject winPanel;
     public GameObject deathUI;
     public TextMeshProUGUI respawnText;
@@ -45,10 +51,31 @@ public class InGameManager : MonoBehaviourPunCallbacks
             pv.RPC("randomMap", RpcTarget.All, random);
         }
 
-        Invoke("SpawnPlayer", 2);
+
+        string player1Name = PhotonNetwork.MasterClient.NickName; // 마스터 클라이언트의 닉네임
+        string player2Name = "Waiting for Player..."; // 기본값 설정
+
+        // 방에 있는 플레이어의 수 확인
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
+        {
+            // 마스터 클라이언트가 아닌 플레이어의 닉네임 가져오기
+            foreach (var player in PhotonNetwork.PlayerList)
+            {
+                if (player != PhotonNetwork.MasterClient) // 마스터 클라이언트를 제외하고
+                {
+                    player2Name = player.NickName; // 상대 플레이어의 닉네임
+                    break; // 첫 번째 상대 플레이어 닉네임만 필요
+                }
+            }
+        }
+
+        // UI 업데이트
+        player1NameText.text = player1Name; // 마스터 클라이언트의 닉네임
+        player2NameText.text = player2Name; // 상대 플레이어의 닉네임
+        startUI.SetActive(true);
     }
 
-    private void SpawnPlayer()
+    public void SpawnPlayer()
     {
         if (isPlayerSpawned) return;  // 이미 스폰된 경우 중복 방지
 
