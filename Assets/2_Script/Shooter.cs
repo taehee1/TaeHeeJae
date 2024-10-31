@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> orbPrefabs;
-    [SerializeField] private int orbIndex = 0; // 원하는 오브 프리팹의 인덱스를 선택합니다.
+    [SerializeField] private int gunTypeIndex = 0; // 원하는 오브 프리팹의 인덱스를 선택합니다.
     [SerializeField] private float reboundForce;
     [SerializeField] private float delay;
     [SerializeField] private float bulletDamage;
@@ -55,17 +54,46 @@ public class Shooter : MonoBehaviour
             {
                 StartCoroutine(ShootCooldown(delay));
 
-                Vector2 direction = ((Vector2)spawnPos.position - (Vector2)gun.transform.position).normalized; // 오브젝트 위치를 사용하여 방향을 계산합니다.
-                GameObject orbInstance = PhotonNetwork.Instantiate("Bullet", spawnPos.position, Quaternion.identity);
-                IShootable orb = orbInstance.GetComponent<IShootable>();
-                if (orb != null)
+                switch (gunTypeIndex) 
                 {
-                    orb.Shoot(direction);
-                    orbInstance.GetComponent<Bullet>().damage = bulletDamage;
-                }
-                else
-                {
-                    Debug.Log("The orb does not implement IShootable interface.");
+                    case 0:
+                        {
+                            Vector2 direction = ((Vector2)spawnPos.position - (Vector2)gun.transform.position).normalized; // 오브젝트 위치를 사용하여 방향을 계산합니다.
+                            GameObject orbInstance = PhotonNetwork.Instantiate("Bullet", spawnPos.position, Quaternion.identity);
+                            IShootable orb = orbInstance.GetComponent<IShootable>();
+                            if (orb != null)
+                            {
+                                orb.Shoot(direction);
+                                orbInstance.GetComponent<Bullet>().damage = bulletDamage;
+                            }
+                            else
+                            {
+                                Debug.Log("The orb does not implement IShootable interface.");
+                            }
+                            break;
+                        }
+                    case 1:
+                        {
+                            int bulletCount = 5; // 한 번에 발사할 총알 개수
+                            float spreadAngle = 5f; // 각 총알 사이의 각도 차이
+
+                            Vector2 direction = ((Vector2)spawnPos.position - (Vector2)gun.transform.position).normalized;
+
+                            for (int i = 0; i < bulletCount; i++)
+                            {
+                                float angleOffset = (i - (bulletCount - 1) / 2f) * spreadAngle; // 각 총알의 각도 오프셋 계산
+                                Vector2 spreadDirection = Quaternion.Euler(0, 0, angleOffset) * direction; // 방향에 오프셋 추가
+
+                                GameObject orbInstance = PhotonNetwork.Instantiate("Bullet", spawnPos.position, Quaternion.identity);
+                                IShootable orb = orbInstance.GetComponent<IShootable>();
+                                if (orb != null)
+                                {
+                                    orb.Shoot(spreadDirection);
+                                    orbInstance.GetComponent<Bullet>().damage = bulletDamage;
+                                }
+                            }
+                            break;
+                        }
                 }
 
                 audioSource.Play();
