@@ -7,6 +7,7 @@ public class Shooter : MonoBehaviour
 {
     [SerializeField] private int gunTypeIndex = 0; // 원하는 오브 프리팹의 인덱스를 선택합니다.
     [SerializeField] private float reboundForce;
+    [SerializeField] private float knockBackForce;
     [SerializeField] private float delay;
     [SerializeField] private float bulletDamage;
 
@@ -50,15 +51,15 @@ public class Shooter : MonoBehaviour
     {
         if (player.GetComponent<PhotonView>().IsMine && canShoot)
         {
-            if (Input.GetMouseButton(0) && movement.canMove)
+            if (movement.canMove)
             {
-                StartCoroutine(ShootCooldown(delay));
-
-                switch (gunTypeIndex) 
+                switch (gunTypeIndex)
                 {
                     case 0:
+                        if (Input.GetMouseButtonDown(0))
                         {
-                            Vector2 direction = ((Vector2)spawnPos.position - (Vector2)gun.transform.position).normalized; // 오브젝트 위치를 사용하여 방향을 계산합니다.
+                            StartCoroutine(ShootCooldown(delay));
+                            Vector2 direction = ((Vector2)spawnPos.position - (Vector2)gun.transform.position).normalized;
                             GameObject orbInstance = PhotonNetwork.Instantiate("Bullet", spawnPos.position, Quaternion.identity);
                             IShootable orb = orbInstance.GetComponent<IShootable>();
                             if (orb != null)
@@ -66,23 +67,23 @@ public class Shooter : MonoBehaviour
                                 orb.Shoot(direction);
                                 orbInstance.GetComponent<Bullet>().damage = bulletDamage;
                             }
-                            else
-                            {
-                                Debug.Log("The orb does not implement IShootable interface.");
-                            }
-                            break;
+                            audioSource.Play();
+                            hand.GetComponent<Rigidbody2D>().AddForce(Vector2.up * reboundForce);
                         }
-                    case 1:
-                        {
-                            int bulletCount = 5; // 한 번에 발사할 총알 개수
-                            float spreadAngle = 5f; // 각 총알 사이의 각도 차이
+                        break;
 
+                    case 1:
+                        if (Input.GetMouseButtonDown(0))
+                        {
+                            StartCoroutine(ShootCooldown(delay));
+                            int bulletCount = 5;
+                            float spreadAngle = 5f;
                             Vector2 direction = ((Vector2)spawnPos.position - (Vector2)gun.transform.position).normalized;
 
                             for (int i = 0; i < bulletCount; i++)
                             {
-                                float angleOffset = (i - (bulletCount - 1) / 2f) * spreadAngle; // 각 총알의 각도 오프셋 계산
-                                Vector2 spreadDirection = Quaternion.Euler(0, 0, angleOffset) * direction; // 방향에 오프셋 추가
+                                float angleOffset = (i - (bulletCount - 1) / 2f) * spreadAngle;
+                                Vector2 spreadDirection = Quaternion.Euler(0, 0, angleOffset) * direction;
 
                                 GameObject orbInstance = PhotonNetwork.Instantiate("Bullet", spawnPos.position, Quaternion.identity);
                                 IShootable orb = orbInstance.GetComponent<IShootable>();
@@ -92,12 +93,54 @@ public class Shooter : MonoBehaviour
                                     orbInstance.GetComponent<Bullet>().damage = bulletDamage;
                                 }
                             }
-                            break;
+                            audioSource.Play();
+                            hand.GetComponent<Rigidbody2D>().AddForce(Vector2.up * reboundForce);
+                            movement.body.GetComponent<Rigidbody2D>().AddForce(-direction * knockBackForce);
                         }
-                }
+                        break;
 
-                audioSource.Play();
-                hand.GetComponent<Rigidbody2D>().AddForce(Vector2.up * reboundForce);
+                    case 2:
+                        {
+                            float maxZoomOutSize = 9f;
+                            float zoomInSpeed = 2f;
+                            float zoomOutSpeed = 1f;
+
+                            if (Input.GetMouseButton(1)) // 우클릭으로 줌 아웃
+                            {
+                                // 현재 OrthographicSize에서 목표 OrthographicSize까지 부드럽게 보간
+                                InGameManager.instance.virtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(
+                                    InGameManager.instance.virtualCamera.m_Lens.OrthographicSize,
+                                    maxZoomOutSize,
+                                    Time.deltaTime * zoomOutSpeed// 보간 비율을 시간에 따라 조정
+                                );
+                            }
+                            else // 우클릭을 떼면 기본 크기로 돌아옴
+                            {
+                                InGameManager.instance.virtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(
+                                    InGameManager.instance.virtualCamera.m_Lens.OrthographicSize,
+                                    5f, // 기본 줌 크기
+                                    Time.deltaTime * zoomInSpeed
+                                );
+                            }
+
+                            if (Input.GetMouseButtonDown(0)) // 좌클릭을 뗐을 때 발사
+                            {
+                                StartCoroutine(ShootCooldown(delay));
+                                Vector2 direction = ((Vector2)spawnPos.position - (Vector2)gun.transform.position).normalized;
+                                GameObject orbInstance = PhotonNetwork.Instantiate("Bullet", spawnPos.position, Quaternion.identity);
+                                IShootable orb = orbInstance.GetComponent<IShootable>();
+                                if (orb != null)
+                                {
+                                    orb.Shoot(direction);
+                                    orbInstance.GetComponent<Bullet>().damage = bulletDamage;
+                                }
+                                audioSource.Play();
+                                hand.GetComponent<Rigidbody2D>().AddForce(Vector2.up * reboundForce);
+                                movement.body.GetComponent<Rigidbody2D>().AddForce(-direction * knockBackForce);
+                            }
+                        }
+                        break;
+                }
             }
         }
     }
@@ -107,26 +150,6 @@ public class Shooter : MonoBehaviour
         canShoot = false;
         yield return new WaitForSeconds(seconds);
         canShoot = true;
-    }
-
-    [PunRPC]
-    void GunFlip()
-    {
-        float angle = transform.rotation.eulerAngles.z;
-
-        if (angle > 180f)
-        {
-            angle -= 360f;
-        }
-
-        if (angle > 90f || angle < -90f)
-        {
-            gameObject.GetComponent<SpriteRenderer>().flipY = true;
-        }
-        else
-        {
-            gameObject.GetComponent<SpriteRenderer>().flipY = false;
-        }
     }
 
     private void Reload()

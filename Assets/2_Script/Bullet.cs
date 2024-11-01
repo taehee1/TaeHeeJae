@@ -21,6 +21,11 @@ public class Bullet : MonoBehaviour, IShootable
         pv = GetComponent<PhotonView>();
     }
 
+    private void Start()
+    {
+        Invoke("AutoRemove", 6f);
+    }
+
     private void Update()
     {
         lastVelocity = rb.velocity;
@@ -72,6 +77,14 @@ public class Bullet : MonoBehaviour, IShootable
                 isDestroyed = true; // 파괴 플래그 설정
                 PhotonNetwork.Destroy(gameObject);
             }
+        }
+    }
+
+    private void AutoRemove()
+    {
+        if (gameObject != null)
+        {
+            Destroy(gameObject);
         }
     }
 }
