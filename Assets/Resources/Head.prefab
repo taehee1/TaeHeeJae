@@ -123,9 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guns:
-  - {fileID: 6644124777677534023}
-  - {fileID: 8119789746104259114}
-  - {fileID: 8034527216975740333}
+  - {fileID: 4856329400084720746}
 --- !u!114 &1980573030645189554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1440,7 +1438,7 @@ Transform:
   m_GameObject: {fileID: 3347064407579942388}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.19, y: 0.4, z: 0.3663142}
+  m_LocalPosition: {x: 3.072, y: 0.4, z: 0.3663142}
   m_LocalScale: {x: 0.22703424, y: 0.22703427, z: 0.22703424}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1999,8 +1997,8 @@ Transform:
   m_GameObject: {fileID: 4856329400084720746}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.05, y: 0.6, z: -0.08712768}
-  m_LocalScale: {x: 1.7659034, y: 2.7046795, z: 0.23784956}
+  m_LocalPosition: {x: -0.04, y: 0.45, z: -0.08712768}
+  m_LocalScale: {x: 2.4423811, y: 3.7407808, z: 0.32920435}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4562075537724205129}
@@ -2071,10 +2069,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bdc94797e0e3354dbe4cf9d2b7ab6bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunTypeIndex: 0
-  reboundForce: 100
-  delay: 0.2
-  bulletDamage: 5
+  gunTypeIndex: 2
+  reboundForce: 30
+  knockBackForce: 2500
+  delay: 5
+  bulletDamage: 40
   spawnPos: {fileID: 4562075537724205129}
   player: {fileID: 620846882147271625}
   gun: {fileID: 3347064407579942388}
@@ -2255,7 +2254,7 @@ Transform:
   m_GameObject: {fileID: 5500948840461200823}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.69, y: 0.4, z: 0.3663142}
+  m_LocalPosition: {x: 3.461, y: 0.4, z: 0.3663142}
   m_LocalScale: {x: 0.22703424, y: 0.22703427, z: 0.22703424}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2625,6 +2624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunTypeIndex: 0
   reboundForce: 100
+  knockBackForce: 0
   delay: 2
   bulletDamage: 10
   spawnPos: {fileID: 6855995493737121737}
@@ -2885,8 +2885,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunTypeIndex: 1
   reboundForce: 100
-  delay: 1
-  bulletDamage: 5
+  knockBackForce: 3000
+  delay: 3
+  bulletDamage: 3
   spawnPos: {fileID: 5916093430974464961}
   player: {fileID: 620846882147271625}
   gun: {fileID: 7267579206918047762}
@@ -2925,7 +2926,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: cd891e5afabacad4a9eb6e2c506f5123, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 8dd4a6039ad2dba44aa743f907956eb4, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -3113,7 +3114,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunTypeIndex: 0
-  reboundForce: 100
+  reboundForce: 80
+  knockBackForce: 0
   delay: 0.2
   bulletDamage: 5
   spawnPos: {fileID: 4887179945149853843}
@@ -3154,7 +3156,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: cd891e5afabacad4a9eb6e2c506f5123, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 66eac9eedcd659d45873a2880f6c164b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
