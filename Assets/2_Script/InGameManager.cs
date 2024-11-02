@@ -70,9 +70,9 @@ public class InGameManager : MonoBehaviourPunCallbacks
         }
 
         // UI 업데이트
+        startUI.SetActive(true);
         player1NameText.text = player1Name; // 마스터 클라이언트의 닉네임
         player2NameText.text = player2Name; // 상대 플레이어의 닉네임
-        startUI.SetActive(true);
     }
 
     public void SpawnPlayer()
