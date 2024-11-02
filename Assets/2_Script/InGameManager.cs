@@ -45,6 +45,11 @@ public class InGameManager : MonoBehaviourPunCallbacks
 
     private void Start()
     {
+        foreach (var m in map)
+        {
+            m.gameObject.SetActive(false);
+        }
+
         if (PhotonNetwork.IsMasterClient)
         {
             int random = Random.Range(0, map.Length);
@@ -88,19 +93,22 @@ public class InGameManager : MonoBehaviourPunCallbacks
             spawnPosition = player2SpawnTransform.position; // 2번 플레이어 스폰 위치
         }
 
-        PhotonNetwork.Instantiate("Head", spawnPosition, Quaternion.identity);
+        // 플레이어 오브젝트 생성
+        GameObject player = PhotonNetwork.Instantiate("Head", spawnPosition, Quaternion.identity);
+
+        // HP 바 생성
+        GameObject hpBar = PhotonNetwork.Instantiate("HpCanvas", spawnPosition, Quaternion.identity);
+
+        // HP 바가 플레이어를 따라다니도록 설정
+        hpBar.GetComponent<HpUI>().SetTarget(player);
+        player.GetComponent<Hp>().hpUI = hpBar.GetComponent<HpUI>().hpImage;
+
         isPlayerSpawned = true;  // 스폰되었음을 기록
     }
 
     [PunRPC]
     public void randomMap(int random)
     {
-        // 모든 맵 비활성화
-        foreach (var m in map)
-        {
-            m.gameObject.SetActive(false);
-        }
-
         // 랜덤으로 선택된 맵 활성화
         map[random].gameObject.SetActive(true);
 
