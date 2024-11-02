@@ -13,8 +13,6 @@ public class Bullet : MonoBehaviour, IShootable
 
     private bool isDestroyed = false; // 파괴 여부 플래그
 
-    Vector3 lastVelocity;
-
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -28,7 +26,7 @@ public class Bullet : MonoBehaviour, IShootable
 
     private void Update()
     {
-        lastVelocity = rb.velocity;
+
     }
 
     public void Shoot(Vector2 direction)

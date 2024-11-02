@@ -50,9 +50,9 @@ public class Hp : MonoBehaviourPunCallbacks
 
         if (transform.position.y < InGameManager.instance.blackZone.transform.position.y)
         {
-            photonView.RPC("TakeDamage", RpcTarget.AllBuffered, 20f);
-            transform.position = new Vector2(transform.position.x, transform.position.y + 20);
+            photonView.RPC("TakeDamage", RpcTarget.AllBuffered, 10f);
             movement.body.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            transform.position = new Vector2(transform.position.x, transform.position.y + 20);
         }
     }
 
@@ -69,7 +69,6 @@ public class Hp : MonoBehaviourPunCallbacks
         {
             gameObject.GetComponent<CameraShake>().RPC_ShakeCamera();
         }
-        movement.StartCoroutine("Stun", 0.2f);
 
         if (currentHp <= 0 && !isDead)
         {

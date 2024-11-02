@@ -94,10 +94,4 @@ public class Movement : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         leftLegRb.AddForce(Vector2.left * (speed * 1000) * Time.deltaTime);
     }
-
-    public IEnumerator Stun(float seconds)
-    {
-        body.GetComponent<Rigidbody2D>().AddForce(Vector2.zero);
-        yield return new WaitForSeconds(seconds);
-    }
 }

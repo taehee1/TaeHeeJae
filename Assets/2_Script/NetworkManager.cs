@@ -14,7 +14,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     [Header("MainPanel")]
     public GameObject mainPanel;
     public InputField nicknameInput;
-    public Text networkSituation;
 
     [Header("LobbyPanel")]
     public GameObject lobbyPanel;
@@ -46,7 +45,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        networkSituation.text = PhotonNetwork.NetworkClientState.ToString();
+        
     }
 
     #region 서버연결

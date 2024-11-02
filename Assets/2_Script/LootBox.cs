@@ -9,6 +9,7 @@ public class LootBox : MonoBehaviour
     public GameObject Image;
 
     PhotonView enteringPlayerPhotonView;
+    GunRandom gunRandom;
 
     private bool canLoot = true;
 
@@ -20,7 +21,7 @@ public class LootBox : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.E) && canLoot)
+        if (Input.GetKey(KeyCode.E) && canLoot && enteringPlayerPhotonView.IsMine)
         {
             currentLootTime -= Time.deltaTime;
 
@@ -30,15 +31,11 @@ public class LootBox : MonoBehaviour
 
                 RandomGun();
             }
-
-            Image.GetComponent<Image>().fillAmount = currentLootTime / lootTime;
         }
 
-        if (Input.GetKeyUp(KeyCode.E) && canLoot)
+        if (Input.GetKeyUp(KeyCode.E) && canLoot && enteringPlayerPhotonView.IsMine)
         {
             currentLootTime = lootTime;
-
-            Image.GetComponent<Image>().fillAmount = currentLootTime / lootTime;
         }
 
         if (!canLoot)
@@ -51,22 +48,28 @@ public class LootBox : MonoBehaviour
 
                 currentLootCoolTime = 0;
             }
-
-            Image.GetComponent<Image>().fillAmount = currentLootCoolTime / lootCoolTime;
         }
 
-
+        if (canLoot)
+        {
+            Image.GetComponent<Image>().fillAmount = currentLootTime / lootTime;
+        }
+        else
+        {
+            Image.GetComponent<Image>().fillAmount = currentLootCoolTime / lootCoolTime;
+        }
     }
 
     private void RandomGun()
     {
         int random = Random.Range(1, 4);
-        enteringPlayerPhotonView.RPC("RandomGunSetup", RpcTarget.All, random);
+        gunRandom.photonView.RPC("RandomGunSetup", RpcTarget.All, random, enteringPlayerPhotonView.Owner.NickName);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         enteringPlayerPhotonView = collision.gameObject.GetComponent<PhotonView>();
+        gunRandom = collision.GetComponentInParent<GunRandom>();
 
         if (collision.tag == "Player" && enteringPlayerPhotonView != null && enteringPlayerPhotonView.IsMine)
         {

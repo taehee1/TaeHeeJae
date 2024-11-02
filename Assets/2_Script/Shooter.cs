@@ -41,22 +41,21 @@ public class Shooter : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Shoot();
-        Reload();
     }
 
     private void Shoot()
     {
-        if (player.GetComponent<PhotonView>().IsMine && canShoot)
+        if (player.GetComponent<PhotonView>().IsMine)
         {
             if (movement.canMove)
             {
                 switch (gunTypeIndex)
                 {
                     case 0:
-                        if (Input.GetMouseButtonDown(0))
+                        if (Input.GetMouseButtonDown(0) && canShoot)
                         {
                             StartCoroutine(ShootCooldown(delay));
                             Vector2 direction = ((Vector2)spawnPos.position - (Vector2)gun.transform.position).normalized;
@@ -73,7 +72,7 @@ public class Shooter : MonoBehaviour
                         break;
 
                     case 1:
-                        if (Input.GetMouseButtonDown(0))
+                        if (Input.GetMouseButtonDown(0) && canShoot)
                         {
                             StartCoroutine(ShootCooldown(delay));
                             int bulletCount = 5;
@@ -123,7 +122,7 @@ public class Shooter : MonoBehaviour
                                 );
                             }
 
-                            if (Input.GetMouseButtonDown(0)) // ¡¬≈¨∏Ø¿ª ∂√¿ª ∂ß πﬂªÁ
+                            if (Input.GetMouseButtonDown(0) && canShoot) // ¡¬≈¨∏Ø¿ª ∂√¿ª ∂ß πﬂªÁ
                             {
                                 StartCoroutine(ShootCooldown(delay));
                                 Vector2 direction = ((Vector2)spawnPos.position - (Vector2)gun.transform.position).normalized;
@@ -150,13 +149,5 @@ public class Shooter : MonoBehaviour
         canShoot = false;
         yield return new WaitForSeconds(seconds);
         canShoot = true;
-    }
-
-    private void Reload()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            
-        }
     }
 }

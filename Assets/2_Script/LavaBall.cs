@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class LavaBall : MonoBehaviour
 {
-    public float jumpForce = 5.0f; // 튀어오르는 힘
-    public float interval = 2.0f; // 튀어오르는 간격
-    public float damage = 10f;
+    public float jumpForce = 5.0f;      // 튀어오르는 힘
+    public float interval = 2.0f;       // 튀어오르는 간격
+    public float damage = 10f;          // 데미지 값
+    public float damageInterval = 1.0f; // 데미지가 들어가는 간격
+
+    private float lastDamageTime = 0f;  // 마지막으로 데미지가 들어간 시간
 
     void Start()
     {
@@ -23,9 +26,16 @@ public class LavaBall : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            if (collision.gameObject.GetComponentInParent<PhotonView>() != null && collision.gameObject.GetComponent<PhotonView>().IsMine)
+            Hp hp = collision.gameObject.GetComponentInParent<Hp>();
+
+            // 마지막 데미지 시점에서 damageInterval 이상 경과한 경우에만 데미지 적용
+            if (hp != null && Time.time >= lastDamageTime + damageInterval)
             {
-                collision.gameObject.GetComponentInParent<PhotonView>().RPC("TakeDamage", RpcTarget.AllBuffered, damage);
+                hp.photonView.RPC("TakeDamage", RpcTarget.AllBuffered, damage);
+                Debug.Log("데미지 전송: " + damage); // 데미지 전송 시 출력
+
+                // 마지막 데미지 시점을 현재 시간으로 업데이트
+                lastDamageTime = Time.time;
             }
         }
     }
