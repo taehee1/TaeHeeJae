@@ -1,6 +1,4 @@
 using Photon.Pun;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour, IShootable
@@ -24,11 +22,6 @@ public class Bullet : MonoBehaviour, IShootable
         Invoke("AutoRemove", 6f);
     }
 
-    private void Update()
-    {
-
-    }
-
     public void Shoot(Vector2 direction)
     {
         if (rb == null)
@@ -36,53 +29,61 @@ public class Bullet : MonoBehaviour, IShootable
             Debug.LogError("Rigidbody2D가 할당되지 않았습니다!");
             return;
         }
-        Debug.Log(direction);
+        Debug.Log("총알 발사 방향: " + direction);
 
         rb.velocity = direction * speed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isDestroyed) return; // 이미 파괴된 경우 처리하지 않음
+        // 이미 파괴된 경우 처리하지 않음
+        if (isDestroyed) return;
 
-        Debug.Log("충돌 감지: " + collision.gameObject.name); // 충돌한 객체의 이름 출력
+        Debug.Log("충돌 감지: " + collision.gameObject.name);
 
+        // 땅과 충돌 처리
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            if (pv.IsMine && !isDestroyed)
+            {
+                isDestroyed = true; // 파괴 플래그 설정
+                PhotonNetwork.Destroy(gameObject); // Photon에서 객체 파괴
+            }
+            return; // Ground와의 충돌 처리가 끝났으므로 더 이상 진행하지 않음
+        }
+
+        // 충돌한 객체의 PhotonView를 가져옴
         PhotonView photonView = collision.gameObject.GetComponentInParent<PhotonView>();
+        if (photonView == null) return; // PhotonView가 없으면 중단
 
-        // 공격
+        // 공격 판정
         if (collision.gameObject.CompareTag("Player") && pv.IsMine != photonView.IsMine)
         {
-            Debug.Log("상대에게 맞음: " + collision.gameObject.name); // 상대에게 맞았을 때 출력
+            Debug.Log("상대방 플레이어에게 명중: " + collision.gameObject.name);
 
-            // 부모 객체에서 Hp 스크립트를 찾기
+            // Hp 스크립트 찾기
             Hp hp = collision.gameObject.GetComponentInParent<Hp>();
             if (hp != null)
             {
                 hp.photonView.RPC("TakeDamage", RpcTarget.AllBuffered, damage);
-                Debug.Log("데미지 전송: " + damage); // 데미지 전송 시 출력
+                Debug.Log("데미지 전송: " + damage);
             }
 
             if (pv.IsMine && !isDestroyed)
             {
                 isDestroyed = true; // 파괴 플래그 설정
-                PhotonNetwork.Destroy(gameObject);
-            }
-        }
-        else if (collision.gameObject.CompareTag("Ground"))
-        {
-            if (pv.IsMine && !isDestroyed)
-            {
-                isDestroyed = true; // 파괴 플래그 설정
-                PhotonNetwork.Destroy(gameObject);
+                PhotonNetwork.Destroy(gameObject); // Photon에서 객체 파괴
             }
         }
     }
 
     private void AutoRemove()
     {
-        if (gameObject != null)
+        if (isDestroyed) return; // 이미 파괴된 경우 중단
+
+        if (pv.IsMine)
         {
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 }
