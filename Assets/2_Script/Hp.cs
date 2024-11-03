@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class Hp : MonoBehaviourPunCallbacks
 {
+    public PlayerSetup playerSetup;
+
     public Image hpUI;
     public Vector3 spawnPosition;  // 시작 위치
 
@@ -40,8 +42,8 @@ public class Hp : MonoBehaviourPunCallbacks
                     PlayerSetup.instance.parts[i].GetComponent<Balance>().force = 10000;
                 }
 
-                PlayerSetup.instance.parts[4].GetComponent<Balance>().force = 300;
-                PlayerSetup.instance.parts[7].GetComponent<Balance>().force = 300;
+                playerSetup.parts[4].GetComponent<Balance>().force = 300;
+                playerSetup.parts[7].GetComponent<Balance>().force = 300;
 
                 InGameManager.instance.deathUI.SetActive(false);
                 pv.RPC("OnRespawn", RpcTarget.All, photonView.Owner.NickName);
@@ -89,10 +91,10 @@ public class Hp : MonoBehaviourPunCallbacks
 
         for (int i = 0; i < 5; i++)
         {
-            PlayerSetup.instance.parts[i].GetComponent<Balance>().force = 0;
+            playerSetup.parts[i].GetComponent<Balance>().force = 0;
         }
 
-        PlayerSetup.instance.parts[7].GetComponent<Balance>().force = 0;
+        playerSetup.parts[7].GetComponent<Balance>().force = 0;
         movement.canMove = false;
     }
 

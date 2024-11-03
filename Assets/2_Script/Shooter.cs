@@ -41,7 +41,7 @@ public class Shooter : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         Shoot();
     }
@@ -54,7 +54,7 @@ public class Shooter : MonoBehaviour
             {
                 switch (gunTypeIndex)
                 {
-                    case 0:
+                    case 0: //±ÇÃÑ
                         if (Input.GetMouseButtonDown(0) && canShoot)
                         {
                             StartCoroutine(ShootCooldown(delay));
@@ -71,7 +71,7 @@ public class Shooter : MonoBehaviour
                         }
                         break;
 
-                    case 1:
+                    case 1: //¼¦°Ç
                         if (Input.GetMouseButtonDown(0) && canShoot)
                         {
                             StartCoroutine(ShootCooldown(delay));
@@ -98,7 +98,7 @@ public class Shooter : MonoBehaviour
                         }
                         break;
 
-                    case 2:
+                    case 2: //½º³ªÀÌÆÛ
                         {
                             float maxZoomOutSize = 9f;
                             float zoomInSpeed = 2f;
@@ -137,6 +137,23 @@ public class Shooter : MonoBehaviour
                                 hand.GetComponent<Rigidbody2D>().AddForce(Vector2.up * reboundForce);
                                 movement.body.GetComponent<Rigidbody2D>().AddForce(-direction * knockBackForce);
                             }
+                        }
+                        break;
+
+                    case 3: //±â°üÃÑ
+                        if (Input.GetMouseButton(0) && canShoot)
+                        {
+                            StartCoroutine(ShootCooldown(delay));
+                            Vector2 direction = ((Vector2)spawnPos.position - (Vector2)gun.transform.position).normalized;
+                            GameObject orbInstance = PhotonNetwork.Instantiate("Bullet", spawnPos.position, Quaternion.identity);
+                            IShootable orb = orbInstance.GetComponent<IShootable>();
+                            if (orb != null)
+                            {
+                                orb.Shoot(direction);
+                                orbInstance.GetComponent<Bullet>().damage = bulletDamage;
+                            }
+                            audioSource.Play();
+                            hand.GetComponent<Rigidbody2D>().AddForce(Vector2.up * reboundForce);
                         }
                         break;
                 }

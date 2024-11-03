@@ -124,7 +124,7 @@ public class InGameManager : MonoBehaviourPunCallbacks
     {
         winPanel.SetActive(true);
         winnerText.text = winner;
-        Invoke("Restart", 3f);
+        Invoke("Restart", 4f);
     }
 
     private void Restart()

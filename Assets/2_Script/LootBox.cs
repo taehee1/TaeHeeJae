@@ -17,11 +17,20 @@ public class LootBox : MonoBehaviour
     private float currentLootTime = 2f;
 
     private float lootCoolTime = 10f;
-    private float currentLootCoolTime;
+    private float currentLootCoolTime = 0;
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.E) && canLoot && enteringPlayerPhotonView.IsMine)
+        if (canLoot)
+        {
+            Image.GetComponent<Image>().fillAmount = currentLootTime / lootTime;
+        }
+        else
+        {
+            Image.GetComponent<Image>().fillAmount = currentLootCoolTime / lootCoolTime;
+        }
+
+        if (Input.GetKey(KeyCode.E) && canLoot && enteringPlayerPhotonView.IsMine && enteringPlayerPhotonView != null)
         {
             currentLootTime -= Time.deltaTime;
 
@@ -33,7 +42,7 @@ public class LootBox : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.E) && canLoot && enteringPlayerPhotonView.IsMine)
+        if (Input.GetKeyUp(KeyCode.E) && canLoot && enteringPlayerPhotonView.IsMine && enteringPlayerPhotonView != null)
         {
             currentLootTime = lootTime;
         }
@@ -50,14 +59,6 @@ public class LootBox : MonoBehaviour
             }
         }
 
-        if (canLoot)
-        {
-            Image.GetComponent<Image>().fillAmount = currentLootTime / lootTime;
-        }
-        else
-        {
-            Image.GetComponent<Image>().fillAmount = currentLootCoolTime / lootCoolTime;
-        }
     }
 
     private void RandomGun()
@@ -85,6 +86,8 @@ public class LootBox : MonoBehaviour
 
         if (collision.tag == "Player" && enteringPlayerPhotonView != null && enteringPlayerPhotonView.IsMine)
         {
+            enteringPlayerPhotonView = null;
+
             canLoot = false;
 
             currentLootTime = lootTime;

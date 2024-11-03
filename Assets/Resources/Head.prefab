@@ -359,6 +359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa72b689d6e12aa4c812914fd150b0ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSetup: {fileID: 9208531354934383072}
   hpUI: {fileID: 2633087447455381565}
   spawnPosition: {x: 0, y: 0, z: 0}
   currentHp: 100
