@@ -37,14 +37,6 @@ public class Hp : MonoBehaviourPunCallbacks
 
             if (respawnTime <= 0)
             {
-                for (int i = 0; i < 4; i++)
-                {
-                    PlayerSetup.instance.parts[i].GetComponent<Balance>().force = 10000;
-                }
-
-                playerSetup.parts[4].GetComponent<Balance>().force = 300;
-                playerSetup.parts[7].GetComponent<Balance>().force = 300;
-
                 InGameManager.instance.deathUI.SetActive(false);
                 pv.RPC("OnRespawn", RpcTarget.All, photonView.Owner.NickName);
             }
@@ -61,6 +53,8 @@ public class Hp : MonoBehaviourPunCallbacks
     [PunRPC]
     public void TakeDamage(float damage)
     {
+        if (isDead) return;
+
         // 이 메서드는 모두가 호출할 수 있도록 함
         currentHp -= damage;
         currentHp = Mathf.Clamp(currentHp, 0, maxHp); // HP를 최대값으로 클램프
@@ -104,6 +98,15 @@ public class Hp : MonoBehaviourPunCallbacks
         Debug.Log($"{playerName} has respawned.");
         // 필요하다면 다른 클라이언트에서 플레이어의 리스폰 상태를 처리
         currentHp = maxHp;
+
+        for (int i = 0; i < 4; i++)
+        {
+            PlayerSetup.instance.parts[i].GetComponent<Balance>().force = 10000;
+        }
+
+        playerSetup.parts[4].GetComponent<Balance>().force = 300;
+        playerSetup.parts[7].GetComponent<Balance>().force = 300;
+
         transform.position = spawnPosition;
         UpdateHpUI(); // 다른 클라이언트에서 HP UI를 업데이트
 
