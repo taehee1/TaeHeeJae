@@ -20,6 +20,8 @@ public class Bullet : MonoBehaviour, IShootable
     private void Start()
     {
         Invoke("AutoRemove", 6f);
+
+        Debug.DrawLine(transform.position, transform.position + Vector3.down * 1f, Color.red, 5f);
     }
 
     public void Shoot(Vector2 direction)
@@ -66,13 +68,12 @@ public class Bullet : MonoBehaviour, IShootable
             if (hp != null)
             {
                 hp.photonView.RPC("TakeDamage", RpcTarget.AllBuffered, damage);
-                Debug.Log("데미지 전송: " + damage);
-            }
 
-            if (pv.IsMine && !isDestroyed)
-            {
-                isDestroyed = true; // 파괴 플래그 설정
-                PhotonNetwork.Destroy(gameObject); // Photon에서 객체 파괴
+                if (pv.IsMine && !isDestroyed)
+                {
+                    isDestroyed = true; // 파괴 플래그 설정
+                    PhotonNetwork.Destroy(gameObject); // Photon에서 객체 파괴
+                }
             }
         }
     }
