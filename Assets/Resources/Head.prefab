@@ -385,6 +385,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: Walk_L
+  - Type: 4
+    SynchronizeType: 0
+    Name: Die
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -2040,7 +2043,7 @@ AudioSource:
   m_GameObject: {fileID: 4856329400084720746}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2848864495815460354, guid: bd4761bd671e84f418714e415417a56e, type: 2}
   m_audioClip: {fileID: 8300000, guid: cd891e5afabacad4a9eb6e2c506f5123, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -2668,7 +2671,7 @@ AudioSource:
   m_GameObject: {fileID: 6644124777677534023}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2848864495815460354, guid: bd4761bd671e84f418714e415417a56e, type: 2}
   m_audioClip: {fileID: 8300000, guid: cd891e5afabacad4a9eb6e2c506f5123, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -2929,7 +2932,7 @@ AudioSource:
   m_GameObject: {fileID: 8034527216975740333}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2848864495815460354, guid: bd4761bd671e84f418714e415417a56e, type: 2}
   m_audioClip: {fileID: 8300000, guid: 8dd4a6039ad2dba44aa743f907956eb4, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -3159,7 +3162,7 @@ AudioSource:
   m_GameObject: {fileID: 8119789746104259114}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 2848864495815460354, guid: bd4761bd671e84f418714e415417a56e, type: 2}
   m_audioClip: {fileID: 8300000, guid: 66eac9eedcd659d45873a2880f6c164b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
