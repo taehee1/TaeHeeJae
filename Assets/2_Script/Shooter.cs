@@ -55,7 +55,7 @@ public class Shooter : MonoBehaviour
                 switch (gunTypeIndex)
                 {
                     case 0: //±ÇÃÑ
-                        if (Input.GetMouseButtonDown(0) && canShoot)
+                        if (Input.GetMouseButton(0) && canShoot)
                         {
                             StartCoroutine(ShootCooldown(delay));
                             Vector2 direction = ((Vector2)spawnPos.position - (Vector2)gun.transform.position).normalized;

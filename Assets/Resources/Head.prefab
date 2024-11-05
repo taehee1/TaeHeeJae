@@ -2002,10 +2002,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunTypeIndex: 2
-  reboundForce: 30
+  reboundForce: 100
   knockBackForce: 2500
-  delay: 5
-  bulletDamage: 40
+  delay: 8
+  bulletDamage: 70
   spawnPos: {fileID: 4562075537724205129}
   player: {fileID: 620846882147271625}
   gun: {fileID: 3347064407579942388}
@@ -2044,7 +2044,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 2848864495815460354, guid: bd4761bd671e84f418714e415417a56e, type: 2}
-  m_audioClip: {fileID: 8300000, guid: cd891e5afabacad4a9eb6e2c506f5123, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f41fbf3d7c52d94469f72a5df3e9d20d, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -2894,7 +2894,7 @@ MonoBehaviour:
   reboundForce: 100
   knockBackForce: 3000
   delay: 3
-  bulletDamage: 3
+  bulletDamage: 5
   spawnPos: {fileID: 5916093430974464961}
   player: {fileID: 620846882147271625}
   gun: {fileID: 7267579206918047762}
@@ -3121,10 +3121,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunTypeIndex: 0
-  reboundForce: 80
+  reboundForce: 50
   knockBackForce: 0
   delay: 0.2
-  bulletDamage: 5
+  bulletDamage: 3
   spawnPos: {fileID: 4887179945149853843}
   player: {fileID: 620846882147271625}
   gun: {fileID: 1130724111678725830}
