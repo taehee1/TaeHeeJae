@@ -17,11 +17,13 @@ public class Hp : MonoBehaviourPunCallbacks
 
     private PhotonView pv; // PhotonView 변수 추가
     private Movement movement;
+    private Animator animator;
 
     private void Start()
     {
         pv = GetComponent<PhotonView>();
         movement = GetComponent<Movement>();
+        animator = GetComponent<Animator>();
 
         currentHp = maxHp;
         spawnPosition = transform.position;
@@ -83,13 +85,11 @@ public class Hp : MonoBehaviourPunCallbacks
         }
         respawnTime = 10f;
 
-        for (int i = 0; i < 5; i++)
-        {
-            playerSetup.parts[i].GetComponent<Balance>().force = 0;
-        }
-
-        playerSetup.parts[7].GetComponent<Balance>().force = 0;
         movement.canMove = false;
+
+        animator.SetBool("Walk_R", false);
+        animator.SetBool("Walk_L", false);
+        animator.SetBool("Die", true);
     }
 
     [PunRPC]
@@ -99,13 +99,7 @@ public class Hp : MonoBehaviourPunCallbacks
         // 필요하다면 다른 클라이언트에서 플레이어의 리스폰 상태를 처리
         currentHp = maxHp;
 
-        for (int i = 0; i < 4; i++)
-        {
-            PlayerSetup.instance.parts[i].GetComponent<Balance>().force = 10000;
-        }
-
-        playerSetup.parts[4].GetComponent<Balance>().force = 300;
-        playerSetup.parts[7].GetComponent<Balance>().force = 300;
+        animator.SetBool("Die", false);
 
         transform.position = spawnPosition;
         UpdateHpUI(); // 다른 클라이언트에서 HP UI를 업데이트
