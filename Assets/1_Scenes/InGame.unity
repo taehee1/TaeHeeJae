@@ -5450,7 +5450,7 @@ MonoBehaviour:
   player2CaptureGauge: {fileID: 1735738099}
   captureTime: 5
   maxCaptureGauge: 100
-  captureGaugeSpeed: 5
+  captureGaugeSpeed: 3
   gaugeSyncThreshold: 1
 --- !u!1 &383450502
 GameObject:
@@ -11998,7 +11998,7 @@ MonoBehaviour:
   player2CaptureGauge: {fileID: 1735738099}
   captureTime: 5
   maxCaptureGauge: 100
-  captureGaugeSpeed: 5
+  captureGaugeSpeed: 3
   gaugeSyncThreshold: 1
 --- !u!1 &765237049
 GameObject:
@@ -28563,7 +28563,7 @@ MonoBehaviour:
   player2CaptureGauge: {fileID: 1735738099}
   captureTime: 5
   maxCaptureGauge: 100
-  captureGaugeSpeed: 5
+  captureGaugeSpeed: 3
   gaugeSyncThreshold: 1
 --- !u!61 &1820303690
 BoxCollider2D:
@@ -30272,7 +30272,7 @@ MonoBehaviour:
   player2CaptureGauge: {fileID: 1735738099}
   captureTime: 5
   maxCaptureGauge: 100
-  captureGaugeSpeed: 5
+  captureGaugeSpeed: 3
   gaugeSyncThreshold: 1
 --- !u!1001 &1924101341
 PrefabInstance:
@@ -32535,7 +32535,7 @@ MonoBehaviour:
   player2CaptureGauge: {fileID: 1735738099}
   captureTime: 5
   maxCaptureGauge: 100
-  captureGaugeSpeed: 5
+  captureGaugeSpeed: 3
   gaugeSyncThreshold: 1
 --- !u!1 &2030185028
 GameObject:

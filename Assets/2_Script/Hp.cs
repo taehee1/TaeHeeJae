@@ -83,7 +83,7 @@ public class Hp : MonoBehaviourPunCallbacks
         {
             InGameManager.instance.deathUI.SetActive(true);
         }
-        respawnTime = 10f;
+        respawnTime = 8f;
 
         movement.canMove = false;
 
