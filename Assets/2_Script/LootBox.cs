@@ -65,7 +65,7 @@ public class LootBox : MonoBehaviour
         int random = Random.Range(1, 4);
         if (gunRandom != null && enteringPlayerPhotonView != null)
         {
-            gunRandom.photonView.RPC("RandomGunSetup", RpcTarget.All, random, enteringPlayerPhotonView.Owner.UserId);
+            gunRandom.photonView.RPC("RandomGunSetup", RpcTarget.All, random, enteringPlayerPhotonView.Owner.NickName);
         }
     }
 
