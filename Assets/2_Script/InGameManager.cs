@@ -52,19 +52,18 @@ public class InGameManager : MonoBehaviourPunCallbacks
         }
 
 
-        string player1Name = PhotonNetwork.MasterClient.NickName; // 마스터 클라이언트의 닉네임
-        string player2Name = "Waiting for Player..."; // 기본값 설정
+        string player1Name = PhotonNetwork.MasterClient.NickName;
+        string player2Name = "Waiting for Player";
 
-        // 방에 있는 플레이어의 수 확인
         if (PhotonNetwork.CurrentRoom.PlayerCount == 2)
         {
             // 마스터 클라이언트가 아닌 플레이어의 닉네임 가져오기
             foreach (var player in PhotonNetwork.PlayerList)
             {
-                if (player != PhotonNetwork.MasterClient) // 마스터 클라이언트를 제외하고
+                if (player != PhotonNetwork.MasterClient)
                 {
-                    player2Name = player.NickName; // 상대 플레이어의 닉네임
-                    break; // 첫 번째 상대 플레이어 닉네임만 필요
+                    player2Name = player.NickName;
+                    break;
                 }
             }
         }
@@ -110,8 +109,8 @@ public class InGameManager : MonoBehaviourPunCallbacks
             case MapType.Move:
             case MapType.Lava:
             case MapType.Ice:
-            case MapType.Push:
             case MapType.Forest:
+            case MapType.Push:
                 player1SpawnTransform = map[random].spawnPoint1.transform;
                 player2SpawnTransform = map[random].spawnPoint2.transform;
                 virtualCamera.GetComponent<CinemachineConfiner2D>().m_BoundingShape2D = map[random].camerazone.GetComponent<PolygonCollider2D>();

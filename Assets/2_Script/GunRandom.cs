@@ -8,9 +8,9 @@ public class GunRandom : MonoBehaviourPunCallbacks
     public GameObject[] guns;
 
     [PunRPC]
-    public void RandomGunSetup(int random, string nickname)
+    public void RandomGunSetup(int random, string userId)
     {
-        if (photonView.Owner.NickName.ToString() == nickname)
+        if (photonView.Owner.UserId == userId)
         {
             foreach (var gun in guns)
             {
